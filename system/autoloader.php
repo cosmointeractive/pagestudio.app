@@ -24,12 +24,12 @@
  * 
  * @param        string $class Object name to be invoked. 
  */
-spl_autoload_register(function($class) {
+spl_autoload_register(function($fileName) {
     
-    if (file_exists(APPPATH . 'libraries/' . $class . '.php')) {
-        require_once APPPATH . 'libraries/' . $class . '.php';        
-    } elseif(file_exists(SYSDIR . '/' . $class . '.php')) {
-        require_once SYSDIR . '/' . $class . '.php';
+    if (file_exists(APPPATH . 'libraries/' . $fileName . '.php')) {
+        require_once APPPATH . 'libraries/' . $fileName . '.php';        
+    } elseif(file_exists(SYSDIR . '/' . $fileName . '.php')) {
+        require_once SYSDIR . '/' . $fileName . '.php';
     }
 });
 

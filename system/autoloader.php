@@ -28,7 +28,7 @@ spl_autoload_register(function($class) {
     
     if (file_exists(APPPATH . 'libraries/' . $class . '.php')) {
         require_once APPPATH . 'libraries/' . $class . '.php';        
-    } else {
+    } elseif(file_exists(SYSDIR . '/' . $class . '.php')) {
         require_once SYSDIR . '/' . $class . '.php';
     }
 });

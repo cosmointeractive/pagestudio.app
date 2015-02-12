@@ -46,7 +46,8 @@
  */
 $GLOBALS['config'] = array(    
     'base_url' => 'http://localhost/projects/pagestudio_v2.0/',
-    'default_controller' => 'dashboard',    
+    'default_controller' => 'main',    
+    'admin_controller' => 'admin',    
     'error_controller' => 'error',    
     'mysql' => array(
         'host'      => 'localhost',

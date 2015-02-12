@@ -29,7 +29,7 @@ final class Login extends Controller
     {
         /** Check if the user is already logged in. Send to default page. */
         if( $this->isLoggedIn() ) {
-            $this->redirect(Config::get('default_controller'));
+            $this->redirect(Config::get('admin_controller'));
         } else {
             /** Run login method if user not logged in. */
             $this->auth_login();
@@ -87,7 +87,7 @@ final class Login extends Controller
                             /** Set cookie to remember user if requested. */
                             $this->rememberMe();
                             /** Redirect to the default controller. */
-                            $this->redirect(Config::get('default_controller'));
+                            $this->redirect(Config::get('admin_controller'));
                         } else {
                             $this->_errors[] = 'Your account has been disabled';
                         }
@@ -148,7 +148,7 @@ final class Login extends Controller
                             /** Set cookie to remember user if requested. */
                             $this->rememberMe();
                             /** Redirect to the default controller. */
-                            $this->redirect(Config::get('default_controller'));
+                            $this->redirect(Config::get('admin_controller'));
                         } else {
                             if(isset($this->_access) && $this->_access === '0') {
                                 $this->_errors[] = 'Your account has been disabled';
@@ -283,7 +283,7 @@ final class Login extends Controller
         /** End all sessions */
         Session::destroy();
         /** Redirect to the default controller. */
-        $this->redirect(Config::get('default_controller'));
+        $this->redirect(Config::get('admin_controller'));
     }
 }
 

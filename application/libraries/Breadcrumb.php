@@ -37,6 +37,7 @@ class Breadcrumb
         $home_link = BASE_URL,
         $home_text = "Home"
     ) {
+        $home_link .= Config::get('admin_controller');
 		$this->href_param   = $href_param;
 		$this->seperator    = $seperator;	
 		$this->home_text    = $home_text;

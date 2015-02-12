@@ -16,22 +16,21 @@
  
 // ------------------------------------------------------------------------
 
-class Main extends Controller
+echo 'Outside Module <br />';
+
+class Pages extends Controller
 {	
+    public function __construct()
+    {
+        $this->index();
+    }
+    
 	public function index()
 	{        
-		// $bc = new Breadcrumb();
-        
-        // no special book is requested, we'll show a list of all available books
-		// $template = $this->loadView('main_view');
-        // $template->set('bread', $bc->makeBread());
-		// $template->render();
-        $this->loadModule('site/pages');
-        $pages = new Pages();
-        
-	}
+		echo 'Hello from inside Modules/Site <br />';
+    }
     
 }
 
-/* End of file main.php */
-/* Location: ./application/controllers/main.php */
+/* End of file pages.php */
+/* Location: ./application/modules/site/controllers/pages.php */

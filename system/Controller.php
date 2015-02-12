@@ -77,6 +77,21 @@ class Controller
 	}
 	
     /**
+     * Method to manually load modules
+     *
+     * @access      public
+     * @var         string $name The plugin file name (minus the extension 
+     *              e.g. .php) to load
+     */
+	public function loadModule($name)
+	{
+        $split = explode('/', $name);
+        $module = $split[0];
+        $moduleController = $split[1];
+		require APPPATH .'modules/'. strtolower($module) .'/controllers/'. strtolower($moduleController) .'.php';
+	}
+    
+    /**
      * Method to manually load plugins
      *
      * @access      public

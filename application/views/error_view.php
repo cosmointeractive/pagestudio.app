@@ -12,7 +12,21 @@
 <body>
     <div id="container">        
         <h1><?php echo $page['heading']; ?></h1>
-        <p><?php echo $page['message']; ?></p>        
+        <?php 
+        $message = ( isset($page['message']) 
+                && ! empty($page['message']) 
+            ) 
+        ? $page['message'] 
+        : 'This page was not found.';
+        
+        if( is_array($message)) {
+            foreach($message as $bit) {
+                echo '<p>' . $bit . '</p>';
+            }
+        } else {
+            echo '<p>' . $message . '</p>';
+        }
+        ?>
     </div>
 </body>
 </html>

@@ -22,6 +22,11 @@
  */
 class Public_Controller extends Controller 
 {	
+    /**        
+     * @var     array Array to store error values
+     */
+    private $error = array();
+    
     public function __construct()
     {
         parent::__construct();

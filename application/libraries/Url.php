@@ -33,6 +33,9 @@ class Url {
 	 */
 	public static function segment($segment)
 	{
+        // Removing spaces before and after
+        $segment = trim($segment);
+        
         /** Ensure an int is being passed. */
 		if( ! is_int($segment)) {
             return false;

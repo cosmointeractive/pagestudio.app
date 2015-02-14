@@ -66,13 +66,15 @@ function pip()
 	if( file_exists($path) ) {
         require_once $path;
 	} else {
-        $controller = Config::get('error_controller');
+        // $controller = Config::get('error_controller');
+        $controller = Config::get('default_controller');
         require_once APPPATH . 'controllers/' . $controller . '.php';
 	}
     
     // Check if the action exists
     if( ! method_exists($controller, $action)){
-        $controller = Config::get('error_controller');
+        // $controller = Config::get('error_controller');
+        $controller = Config::get('default_controller');
         require_once APPPATH . 'controllers/' . $controller . '.php';
         $action = 'index';
     }

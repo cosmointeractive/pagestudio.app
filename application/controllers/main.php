@@ -18,7 +18,8 @@
 
 /**
  * This class in essence functions as a router class
- * Forward page request to the appropriate module/controlelr 
+ * Forward page request to the appropriate module/controller 
+ * @note        This may end up being part of the Public_Controller in the future
  */
 class Main extends Public_Controller
 {	
@@ -49,14 +50,7 @@ class Main extends Public_Controller
         
         // @note    Load a list of pages from the database and save them in an array
         // @note    Consider populating $pageController array with data from a database
-        switch($segment) {
-            case $this->pageExists($segment) : $pageController = array(
-                'module' => 'site',
-                'controller' => 'pages',
-                'method' => 'index'
-            );
-            break;
-            
+        switch($segment) {            
             case 'contact' : $pageController = array(
                 'module' => 'site',
                 'controller' => 'contact',
@@ -70,6 +64,13 @@ class Main extends Public_Controller
                 'method' => 'index'
             );
             break;
+            
+            default : $pageController = array(
+                'module' => 'site',
+                'controller' => 'pages',
+                'method' => 'index'
+            );
+            break;
         }
         // This will error to the 404 page if the module/controller is not found
         $this->loadModule($pageController['module'] . '/' . $pageController['controller']);
@@ -77,29 +78,7 @@ class Main extends Public_Controller
         $pages = new $object;
         
     }
-    
-    /**
-     * Get a list of active pages from the database
-     * @return      string $pageSlug The url slug of the page
-     */
-    private function pageExists($pageSlug) 
-    {
-        if(in_array($pageSlug, array(
-            '',
-            'home', 
-            'about',
-            'mission',
-            'giving', 
-            'contact',
-            'blog'
-        ))) {
-            return $pageSlug;
-        } else {
-            return false;
-        }
-        
-    }
-    
+
 }
 
 /* End of file main.php */

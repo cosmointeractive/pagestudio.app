@@ -1,0 +1,100 @@
+
+.example .icon,
+.example .icon.flat,
+.example .icon.x32 { border: 1px solid #ddd; margin: 2px; } 
+/*
+ * Larger 32x icons
+ */
+.icon.x32 					{ 
+	padding:0px; 
+	margin:-3px 0 0 0; 
+	width: 36px; 
+	height: 35px; 
+	background-image: url(../img/icons/32x/icons_sprite_32x.png); 
+	display: inline-block;
+	vertical-align:text-top; 
+}
+/* 
+.icon.x32.icon-film 				{ background-position: -60px -8px; }
+ */
+.icon.x32.icon-house 				{ background-position: -9px -8px; }
+.icon.x32.icon-link 				{ background-position: -60px -8px; }
+.icon.x32.icon-media 				{ background-position: -108px -8px; }
+.icon.x32.icon-pages 				{ background-position: -161px -8px; }
+.icon.x32.icon-plug 				{ background-position: -208px -8px; }
+.icon.x32.icon-tools 			    { background-position: -259px -8px; }
+.icon.x32.icon-settings	        	{ background-position: -309px -8px; }
+.icon.x32.icon-tack 				{ background-position: -359px -8px; }
+.icon.x32.icon-users    			{ background-position: -408px -8px; }
+.icon.x32.icon-keys         		{ background-position: -459px -8px; }
+.icon.x32.icon-comment 				{ background-position: -508px -8px; }
+.icon.x32.icon-layout    			{ background-position: -552px -8px; }
+
+.icon.x32.icon-volume 				{ background-position: -9px -59px; }
+.icon.x32.icon-star 				{ background-position: -58px -59px; }
+.icon.x32.icon-clipboard 			{ background-position: -108px -59px; }
+.icon.x32.icon-package				{ background-position: -159px -59px; }
+.icon.x32.icon-user-group			{ background-position: -208px -59px; }
+.icon.x32.icon-open-book 			{ background-position: -259px -59px; }
+.icon.x32.icon-open-bookmark		{ background-position: -309px -59px; }
+.icon.x32.icon-pencil 				{ background-position: -359px -59px; }
+.icon.x32.icon-map-locator 			{ background-position: -408px -59px; }
+.icon.x32.icon-calendar-day 		{ background-position: -459px -59px; }
+.icon.x32.icon-mobile 				{ background-position: -508px -59px; }
+.icon.x32.icon-grad-cap 			{ background-position: -556px -59px; }
+
+/*
+ * Smaller 16x icons
+ */
+.icon {
+	margin: -5px 2px 0; 
+	width: 22px; 
+	height: 22px; 
+	display: inline-block;
+	vertical-align:middle; 
+	background-image: url(../img/icons/16x/icons_sprite_16x.png); 
+}
+.icon.icon-camera					{ background-position: -14px -14px; }
+.icon.icon-brick					{ background-position: -60px -15px; }
+.icon.icon-add						{ background-position: -112px -14px; }
+.icon.icon-save-grey				{ background-position: -162px -14px; }
+.icon.icon-save-blue				{ background-position: -215px -15px; }
+.icon.icon-report					{ background-position: -264px -15px; }
+.icon.icon-puzzle-grey				{ background-position: -312px -14px; }
+.icon.icon-puzzle-green				{ background-position: -363px -14px; }
+.icon.icon-pencil					{ background-position: -412px -14px; }
+.icon.icon-page-edit				{ background-position: -463px -16px; }
+.icon.icon-page-delete				{ background-position: -512px -17px; }
+
+.icon.icon-warning					{ background-position: -15px -62px; }
+.icon.icon-key						{ background-position: -64px -64px; }
+.icon.icon-house					{ background-position: -112px -64px; }
+.icon.icon-trashcan					{ background-position: -165px -64px; }
+.icon.icon-flag-grey				{ background-position: -210px -62px; }
+.icon.icon-flag						{ background-position: -260px -60px; }
+.icon.icon-gear						{ background-position: -308px -63px; }
+.icon.icon-magnify					{ background-position: -360px -63px; }
+
+/*
+ * Menu Icons
+ */
+.icon.flat 					{ 
+	padding:0px; 
+	margin:-3px 0 0 0; 
+	width: 35px; 
+	height: 35px; 
+	background-image: url(../img/icons/ui-icon-flat-555555.png); 
+	display: inline-block;
+	vertical-align:text-top; 
+}
+.icon.flat:hover				{ 
+	background-image: url(../img/icons/ui-icon-flat-ffffff.png); 
+}
+.icon.flat.icon-dashboard-o			{ background-position: -5px -5px; }
+.icon.flat.icon-picture-o 			{ background-position: -51px -5px; }
+.icon.flat.icon-pages 				{ background-position: -100px -5px; }
+.icon.flat.icon-plus-circle-o 		{ background-position: -144px -5px; }
+.icon.flat.icon-comment-o			{ background-position: -190px -5px; }
+.icon.flat.icon-user		     	{ background-position: -236px -5px; }
+.icon.flat.icon-cog-o      			{ background-position: -283px -5px; }
+.icon.flat.icon-power-off			{ background-position: -325px -49px; }

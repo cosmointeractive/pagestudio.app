@@ -16,8 +16,8 @@
  
 // ------------------------------------------------------------------------
 
-class Url {
-
+class Url 
+{
 	public static function base_url()
 	{
 		return Config::get('base_url');
@@ -34,7 +34,7 @@ class Url {
 	public static function segment($segment)
 	{
         // Removing spaces before and after
-        $segment = trim($segment);
+        // $segment = trim($segment);
         
         /** Ensure an int is being passed. */
 		if( ! is_int($segment)) {
@@ -52,14 +52,17 @@ class Url {
         if(strpos($base_url, "localhost") !== false) {
             $base_url = str_replace('localhost', '', $base_url);
         }
+
         /**
 		 * Remove base_url from the current url. 
 		 */
-		$requested_url = str_replace($base_url, '', $_SERVER['REQUEST_URI']);        
+		$requested_url = str_replace($base_url, '', $_SERVER['REQUEST_URI']);  
+        
 		/**
 		 * Remove double '//' slashes from the string
 		 */
 		$requested_url =  str_replace("//", "/", $requested_url);
+
         /**
 		 * Split url into chunks using '/' as the delimiter
 		 */

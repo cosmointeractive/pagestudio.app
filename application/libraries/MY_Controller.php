@@ -36,7 +36,7 @@ class MY_Controller extends Controller
          * else send the user to the login page.
          */
         if( ! Session::get('session_id')) {
-            $this->redirect('login');
+            $this->redirect(Config::get('login_controller'));
         }
 	}
     

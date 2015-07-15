@@ -49,10 +49,9 @@
  * 
  * Prototype:
  *
- *  $autoload['packages'] = array(APPPATH.'third_party', '/usr/local/shared');
+ * $autoload['packages'] = array(APPPATH.'third_party', '/usr/local/shared');
  *
  */
-
 $autoload['packages'] = array();
 
 
@@ -65,10 +64,21 @@ $autoload['packages'] = array();
  *
  * Prototype:
  *
- *	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
+ * $autoload['libraries'] = array('database', 'session', 'xmlrpc');
  */
-
-$autoload['libraries'] = array('Lex/Parser');
+$autoload['libraries'] = array(
+    'Lex/Parser', 
+    'FluentPDO/FluentPDO',
+    'FluentPDO/FluentStructure',
+    'FluentPDO/FluentUtils',
+    'FluentPDO/FluentLiteral',
+    'FluentPDO/BaseQuery',
+    'FluentPDO/CommonQuery',
+    'FluentPDO/SelectQuery',
+    'FluentPDO/InsertQuery',
+    'FluentPDO/UpdateQuery',
+    'FluentPDO/DeleteQuery'
+);
 
 
 /**
@@ -77,12 +87,12 @@ $autoload['libraries'] = array('Lex/Parser');
  * -------------------------------------------------------------------
  * Prototype:
  *
- *	$autoload['helper'] = array('url', 'file');
+ * $autoload['helper'] = array('url', 'file');
  */
-
 $autoload['helper'] = array(
     'error_handler_helper',
-    'functions_helper'
+    'functions_helper',
+    'admin_helper'
 );
 
 
@@ -92,13 +102,12 @@ $autoload['helper'] = array(
  * -------------------------------------------------------------------
  * Prototype:
  *
- *	$autoload['config'] = array('config1', 'config2');
+ * $autoload['config'] = array('config1', 'config2');
  *
  * NOTE: This item is intended for use ONLY if you have created custom
  * config files.  Otherwise, leave it blank.
  *
  */
-
 $autoload['config'] = array();
 
 
@@ -110,7 +119,6 @@ $autoload['config'] = array();
  * NOTE: Do not include the "_lang" part of your file.  For example
  * "codeigniter_lang.php" would be referenced as array('codeigniter');
  */
-
 $autoload['language'] = array();
 
 
@@ -120,10 +128,9 @@ $autoload['language'] = array();
  * -------------------------------------------------------------------
  * Prototype:
  *
- *	$autoload['model'] = array('model1', 'model2');
+ * $autoload['model'] = array('model1', 'model2');
  *
  */
-
 $autoload['model'] = array();
 
 

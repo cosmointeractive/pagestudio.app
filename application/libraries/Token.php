@@ -57,7 +57,7 @@ class Token
      * Method to validate a token stored in the session. 
      *
      * @required   string $token The token to check for
-     * @required   string $sessionToken Token stored in the session
+     * @param      string $sessionToken Token stored in the session
      * @return     bool Return true or false
      */
     public static function validate($token)
@@ -74,7 +74,7 @@ class Token
     }
     
     /**
-     * THIS METHOD IS BETA
+     * THIS METHOD IS IN BETA
      * Alternative method to validate the token. This process reverse 
      * engineers the token as oppose to the method above which simply 
      * does a match comparison. 

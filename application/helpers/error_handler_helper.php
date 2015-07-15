@@ -24,7 +24,7 @@
  * 
  * @author     thanosb
  * @author     ddonahue
- * @author     Cosmo Mathieu <cosmo@cosmointeractive.com>
+ * @author     Cosmo Mathieu <cosmo@cosmointeractive.co>
  * @version    0.0.4
  * 
  * @param      $errno Error level
@@ -35,6 +35,7 @@
  * @note	   Future consideration calls to turn this function into a class. 
  *             Resources to consider: 
  * 			   http://www.phpclasses.org/package/3890-PHP-Handle-PHP-scripts-execution-errors.html
+ * @note       Error levels http://www.w3schools.com/php/php_error.asp
  */ 
 function my_error_handler($errno, $errstr, $errfile, $errline)
 {  
@@ -108,6 +109,10 @@ if(defined('ENVIRONMENT')) {
             set_error_handler("my_error_handler");
         break;
     }	
+}
+
+function log_message($key, $item, $file = null, $line = null) {
+    my_error_handler($key, $item, $file, $line);
 }
 
 /* End of file error_handler_helper.php */

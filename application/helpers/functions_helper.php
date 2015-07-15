@@ -11,7 +11,7 @@
  * http://codeigniter.com for further improvement and reliability. 
  *
  * @package     PageStudio
- * @author      Cosmo Mathieu <cosmo@cimwebdesigns.com>   
+ * @author      Cosmo Mathieu <cosmo@cosmointeractive.co>   
  */
  
 // ------------------------------------------------------------------------
@@ -19,16 +19,16 @@
 /**
  * Helper Functions
  *
- * Helper functions are a collection of functions that helps you with
- * tasks. Unlike most other systems, in this CMS, Helper Functions are not written 
+ * Helper functions are a collection of functions that helps you with tasks. 
+ * Unlike most other systems, in this CMS, Helper Functions are not written 
  * in an Object Oriented format. They are simple, procedural functions. 
  * Each helper function performs one specific task, and may be dependent of one or 
  * more other Helper Functions.
  * Helper functions are not native to this application alone. They can be reused in 
  * other php applications. 
  *
- * @version:    Version 0.1.0 
- * @modified:   05/03/2014
+ * @version:    Version 0.2.0 
+ * @modified:   07/01/2015
  *
  * Table of Contents:
  * ------------------------------
@@ -50,7 +50,11 @@
  * - wrap_in_html_entities()
  * - random_readable_string()
  * - random_alphanumeric()
+ * - random_passwd()
  * - extract_emails()
+ * - arrayToObject()
+ * - mime_file_type()
+ * - datetime()                         Function with formated date
  */
  
 /**
@@ -61,8 +65,14 @@
  *
  * @return       string
  */
-function escape_and_addslashes($string) 
-{
+function escape_and_addslashes($string) {
+    $array = array (
+		'\r\n' => '',
+		'<p>\r\n</p>' => ''
+	);
+
+	$string = strtr( $string, $array );
+    
 	return addcslashes(mysql_real_escape_string($string), "%_"); 
 }
 
@@ -71,8 +81,14 @@ function escape_and_addslashes($string)
  * This function removes slashes twice. This is
  * because we are adding the slashes twice before writing to the database.
  */
-function remove_slashes($string)
-{
+function remove_slashes($string) {
+    $array = array (
+		'\r\n' => '',
+		'<p>\r\n</p>' => ''
+	);
+
+	$string = strtr( $string, $array );
+    
 	return stripcslashes(stripslashes($string));
 }
 
@@ -87,8 +103,7 @@ function remove_slashes($string)
  * @modified   06/19/2014    
  * @return     $string
  */ 
-function remove_dbl_slashes( $string )
-{
+function remove_dbl_slashes( $string ) {
 	/*
 	 * Remove all double (//) slashes.
 	 */
@@ -106,8 +121,7 @@ function remove_dbl_slashes( $string )
  * @param        $param
  * @return       string
  */
-function filter_POST( $param ) 
-{
+function filter_POST( $param ) {
 	//return mysql_real_escape_string($param);
 	return addcslashes(mysql_real_escape_string($param), "%_"); 
 }
@@ -122,12 +136,19 @@ function filter_preg_replc( $var )
 }
 
 /**
- * This function formats a date from XXXX-XX-XX 
- * to readable format 
- * Formats - (l, F jS, Y == Weekday, Month, nth, YYYYY)*/
-function strtotime_date($date_value, $date_format)
-{
-	return ($date_value == '0000-00-00') ? 'No Date Entered' : date($date_format, strtotime($date_value));
+ * Formats a date from XXXX-XX-XX to readable format 
+ * @note       Date Formats - (l, F jS, Y == Weekday, Month, nth, YYYYY)
+ * @note       Time Formats - (h:m, A == Hour, Minute, AM/PM)
+ *
+ * @param      string $datetime_value
+ * @param      string $datetime_format
+ * @param      string $message
+ * @return     string
+ */
+function strtotime_date($datetime_value, $datetime_format, $message = 'No Date Entered' ) {
+	return ($datetime_value == '0000-00-00' || $datetime_value == '0000-00-00 00:00:00') 
+            ? $message 
+            : date($datetime_format, strtotime($datetime_value));
 }
 
 /*****************************************************************************
@@ -206,7 +227,7 @@ function make_slug($text)
 	// remove unwanted characters
 	$text = preg_replace('~[^-\w]+~', '', $text);
 
-	return (empty($text)) ?  'n-a' : $text;
+	return (empty($text)) ?  '' : $text;
 }
 
 /**
@@ -401,10 +422,92 @@ function random_alphanumeric( $random_string_length = 8 )
 	  */
 	$string = '';
 	for ( $i = 0; $i < $random_string_length; $i++ ) {
-		$string = $characters[ rand( 0, strlen($characters) - 1 ) ];
+		$string .= $characters[ rand( 0, strlen($characters) - 1 ) ];
 	}
 	
 	return $string;
+} 
+
+/**
+ * random_passwd
+ * @Syntax: random_passwd()
+ * @Description: Function to generate random alpha numeric strings. 
+ * Used to generate random passwords, confirmation links, etc.
+ * @Param:
+ *         $length   (Required): The desired length
+ *         $strength (Required): The desired strength
+ *
+ * @Updated: 03/09/2014 
+ * @Return: $password
+ */
+function random_passwd( 
+    $complexity = 'simple', 
+    $length = 8, 
+    $case = 'ucfirst' 
+) {
+	$vowels 	 = 'aeuy';
+	$consonants  = 'bdghjmnpqrstvz';
+	$numeric 	= '0123456789';
+	$password 	 = '';	
+	$alt         = time() % 2;
+	
+	/*
+	 * Create a simple 8 alphanumeric password
+	 */
+	if ( $complexity == 'simple')
+	{
+		/* 
+		 * Create a randomized alpha characters only string and add to variable $password
+		 */
+		$password .= random_readable_string( 4 );
+		
+		/*
+		 * Randomize numeric characters only and add to variable $password
+		 */
+		for ($i = 0; $i < 4; $i++) 
+		{
+			$password .= $numeric[rand(0, strlen($numeric) - 1)];
+		}
+	}
+	/*
+	 * Create a strong password based on complexity level
+	 */
+	else if ( $complexity >= 1)
+	{
+		if ($complexity >= 1) {
+			$consonants .= 'BDGHJLMNPQRSTVWXZ';
+		}
+		
+		if ($complexity >= 2) {
+			$vowels .= "AEUY";
+		}
+		
+		if ($complexity >= 3) {
+			$consonants .= '23456789';
+		}
+		
+		if ($complexity >= 4 ) {
+			$vowels .= '@#$%';
+		}	
+		
+		for ($i = 0; $i < $length; $i++) 
+		{
+			if ($alt == 1) {
+				$password .= $consonants[(rand() % strlen($consonants))];
+				$alt = 0;
+			} else {
+				$password .= $vowels[(rand() % strlen($vowels))];
+				$alt = 1;
+			}
+		}
+	}
+	
+	/*
+	 * Converted one or all alphabetic characters to uppercase. 
+	 */
+	$password = ( $case == 'ucALL' ) ? strtoupper( $password ) : ucfirst( $password );	
+	
+	return $password;
 } 
 
 /**
@@ -424,6 +527,137 @@ function extract_emails( $string )
 
     return ( isset($m[0]) ) ? $m[0] : array();
 }
+
+
+/**
+ * GetBetween() 
+ * 
+ * Retrieves the content contained within a given parameter. 
+ * 
+ * @usage     GetBetween( $string, $start, $end ) 
+ * @param     $start, $string, $end 
+ * @return    string
+ */ 
+function GetBetween($string,$start,$end)
+{
+	//	$regex = '#<code>(.*?)</code>#';
+	//	http://stackoverflow.com/questions/9253027/get-everthing-between-tag-and-tag-with-php
+	
+	$r = @explode($start, $string);
+	if (isset($r[1]))
+	{
+		$r = explode($end, $r[1]);		
+		return $r[0];
+	} 
+	else 
+	{		
+		return '';
+	}
+}
+
+/**
+ * Return the base url 
+ * 
+ * @syntax     admin_theme_uri() 
+ * @param      string BASE_URL
+ * @return     string
+ */ 
+if( ! function_exists('admin_theme_uri')) {
+    function admin_theme_uri() {
+        return (BASE_URL) ? BASE_URL : '';
+    }
+}
+
+/**
+ * Convert an array to an object
+ * 
+ * @syntax     arrayToObject( $param ) 
+ * @param      array $array
+ * @return     object
+ */ 
+if( ! function_exists('arrayToObject')) {
+    function arrayToObject($array) {
+        $object = new stdClass();
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $value = arrayToObject($value);
+            }
+            $object->$key = $value;
+        }
+        return $object;
+    }
+}
+
+/**
+ * Show css class in the html body tag
+ * 
+ * @param      array|string $atts
+ * @return     string
+ */ 
+if( ! function_exists('body_class')) {
+    function body_class($atts) {
+        $body_class = '';    
+        if( ! empty($atts)) {
+            if(is_array($atts)) {
+                foreach($atts as $att) {
+                    $body_class .= $att . ' ';
+                }
+            } else {
+                $body_class = $atts;
+            }
+        }
+        return 'class="' . $body_class . '"';
+    }
+}
+
+/**
+ * Return the extension associated with a mime type
+ *
+ * @see        For more types http://php.net/manual/en/function.mime-content-type.php
+ * @param      string $mime_type
+ * @return     string
+ */ 
+if( ! function_exists('mime_file_type')) {
+    function mime_file_type($mime_type) {
+        $mime_types = array(
+            
+            // images
+            'image/pjpeg'   => "jpg",
+            'image/jpeg'    => "jpg",
+            'image/jpg'     => "jpg",
+            'image/png'     => "png",
+            'image/x-png'   => "png",
+            'image/gif'     => 'gif',
+            'image/bmp'     => 'bmp',
+            'image/vnd.microsoft.icon' => 'ico',
+            'image/tiff'    => 'tiff',
+            'image/tiff'    => 'tif',
+            'image/svg+xml' => 'svg',
+            'image/svg+xml' => 'svgz',
+            
+             // audio/video
+            'audio/mpeg'    => 'mp3',
+            'video/quicktime' => 'mov'
+        );
+        
+        if (array_key_exists($mime_type, $mime_types)) {
+            return $mime_types[$mime_type];
+        }
+    }
+}
+
+/**
+ * Return the current server date and time to the caller 
+ * 
+ * @param      $format Date format 
+ * @return     datetime Formated date and time 
+ */
+if( ! function_exists('datetime')){
+    function datetime($format = 'Y-m-d H:i:s') {
+        return (new DateTime())->format($format);
+    }
+}
+
 
 /* End of file functions_helper.php */
 /* Location: ./application/helpers/functions_helper.php */

@@ -11,10 +11,16 @@
  * http://codeigniter.com for further improvement and reliability. 
  *
  * @package     PageStudio
- * @author      Cosmo Mathieu <cosmo@cimwebdesigns.com>   
+ * @author      Cosmo Mathieu <cosmo@cosmointeractive.co>   
  */
 
 // ------------------------------------------------------------------------
+
+/** 
+ * DEFAULT SERVER TIMEONE
+ * SET the server's default timezone 
+ */
+date_default_timezone_set('America/New_York'); 	
 
 /**
  * Application Configuration
@@ -40,6 +46,16 @@
  * [session_name]   
  * [session_token]   
  * [token_salt]   
+ * [logs]               Array of log files
+ * [logs][access]       The name of the access log
+ * [logs][error]        The name of the error log file
+ * [theme_path]         Location of the theme folder 
+ * [upload_path]        Location to the upload folder
+ * [slider_upload_path] Location to upload slideshow images        
+ * [cache]              
+ * [cache][driver]      
+ * [cache][file_path]   Location of the saved cache
+ * [thumb_image_size]   Thumbnail sizes for images uploaded to the slider module
  *
  * @source     https://www.youtube.com/watch?v=JQkfAdZbAJE
  * @global     mixed $GLOBALS['config'] Holder of all configuration variables
@@ -48,6 +64,7 @@ $GLOBALS['config'] = array(
     'base_url' => 'http://localhost/projects/pagestudio_v2.0/',
     'default_controller' => 'main',    
     'admin_controller' => 'admin',    
+    'login_controller' => 'login',    
     'error_controller' => 'error',    
     'mysql' => array(
         'host'      => 'localhost',
@@ -70,6 +87,29 @@ $GLOBALS['config'] = array(
     'logs' => array(
         'access'    => 'access.log',
         'error'     => 'error.log'
+    ),
+    'theme_path'    => 'public_html/themes/',
+    'upload_path'   => 'public_html/uploads/',
+    'slider_upload_path'   => 'public_html/uploads/sliders/',
+    'cache'         => array(
+        'driver'    => '',
+        'name'      => 'default',
+        'extension' => '.cache',
+        'file_path' => APPPATH . 'cache/'
+    ), 
+    'thumb_image_size' => array(
+        '-380x290' => array(
+            'width' => '380',
+            'height' => '290'
+        ),
+        // '-420x390' => array(
+            // 'width' => '420',
+            // 'height' => '390'
+        // ),
+        '-150x150' => array(
+            'width' => '150',
+            'height' => '150'
+        )
     )
 );
 

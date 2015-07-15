@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>static/css/error.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>public_html/themes/_system/css/error.css" type="text/css" media="screen" />
 </head>
 <body>
     <div id="container">        

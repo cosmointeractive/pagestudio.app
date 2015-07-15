@@ -22,7 +22,7 @@
  * Autoload Objects with files located in the libraries and system folders only.
  * File names must math the name of the Object defined within to be autoloaded.
  * 
- * @param        string $class Object name to be invoked. 
+ * @param    string $class Object name to be invoked 
  */
 spl_autoload_register(function($fileName) {
     
@@ -40,8 +40,13 @@ spl_autoload_register(function($fileName) {
  *
  * @see        ./application/config/autoload.php for a complete list
  */
-foreach($autoload['config'] as $helper) {
-    require_once APPPATH . 'config/' . $helper . '.php';
+foreach($autoload['config'] as $config) {
+    $file = APPPATH . 'config/' . $config . '.php';
+    if (file_exists($file)) {
+        require $file;
+    } else {
+        log_message('8', 'File ' . $file . ' was not found on the server.', __FILE__, '46');
+    }
 }
 
 /**
@@ -51,19 +56,29 @@ foreach($autoload['config'] as $helper) {
  *
  * @see        ./application/config/autoload.php for a complete list
  */
-foreach($autoload['language'] as $helper) {
-    require_once APPPATH . 'language/' . $helper . '.php';
+foreach($autoload['language'] as $language) {
+    $file = APPPATH . 'language/' . $language . '.php';
+    if (file_exists($file)) {
+        require $file;
+    } else {
+        log_message('8', 'File ' . $file . ' was not found on the server.', __FILE__, '62');
+    }
 }
 
 /**
- * Autoload Model files
+ * Autoload Models
  * 
  * Anything in this array will be loaded automatically. 
  *
  * @see        ./application/config/autoload.php for a complete list
  */
-foreach($autoload['model'] as $helper) {
-    require_once APPPATH . 'models/' . $helper . '_model.php';
+foreach($autoload['model'] as $models) {
+    $file = APPPATH . 'models/' . $models . '.php';
+    if (file_exists($file)) {
+        require $file;
+    } else {
+        log_message('8', 'File ' . $file . ' was not found on the server.', __FILE__, '78');
+    }
 }
 
 /**
@@ -74,7 +89,28 @@ foreach($autoload['model'] as $helper) {
  * @see        ./application/config/autoload.php for a complete list
  */
 foreach($autoload['helper'] as $helper) {
-    require_once APPPATH . 'helpers/' . $helper . '.php';
+    $file = APPPATH . 'helpers/' . $helper . '.php';
+    if (file_exists($file)) {
+        require $file;
+    } else {
+        log_message('8', 'File ' . $file . ' was not found on the server.', __FILE__, '94');
+    }
+}
+
+/**
+ * Autoload Libraries
+ * 
+ * Anything in this array will be loaded automatically. 
+ *
+ * @see        ./application/config/autoload.php for a complete list
+ */
+foreach($autoload['libraries'] as $libraries) {
+    $file = APPPATH . 'libraries/' . $libraries . '.php';
+    if (file_exists($file)) {
+        require $file;
+    } else {
+        log_message('8', 'File ' . $file . ' was not found on the server.', __FILE__, '110');
+    }
 }
 
 /* End of file autoloader.php */

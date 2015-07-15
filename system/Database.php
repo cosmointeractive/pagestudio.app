@@ -11,9 +11,9 @@
  * http://codeigniter.com for further improvement and reliability. 
  *
  * @package     PageStudio
- * @author      Cosmo Mathieu <cosmo@cimwebdesigns.com>   
+ * @author      Cosmo Mathieu <cosmo@cosmointeractive.co>
  */
- 
+
 // ------------------------------------------------------------------------
 
 /**
@@ -45,7 +45,7 @@ class Database
     /**
      * Constructor
      */
-    public function __construct()
+    private function __construct()
     {
         try {
             $this->_pdo = new PDO(
@@ -62,8 +62,9 @@ class Database
     /**
      * Return the database instance object, create the object if not set
      * 
-     * @access      public
-     * @param       $_instance 
+     * @access     public
+     * @param      $_instance 
+     * @return     object
      */
     public static function getInstance()
     {
@@ -136,8 +137,30 @@ class Database
             
             //Check if operator is of allowed type
             //Perform query if condition is met
+            // if (in_array($operator, $operators)) {
+                // $sql = "{$action} FROM {$table} WHERE {$field} {$operator} ?";
+                // if( ! $this->query($sql, array($value))->error()) {
+                    // return $this;
+                // }
+            // }
+            
+            /** @note     Adding the ability to do AND statements. */
             if (in_array($operator, $operators)) {
-                $sql = "{$action} FROM {$table} WHERE {$field} {$operator} ?";
+                if(is_array($value)) {
+                    $cnt = 0;
+                    foreach($value as $condition){
+                        $x = "{$field} {$operator} ?";
+                        if($cnt > 0) {
+                            $x .= " AND {$field} {$operator} ?";
+                        } 
+                        $cnt++;
+                    }
+                } else {
+                    $x = "{$field} {$operator} ?";
+                }                
+                
+                $sql = "{$action} FROM {$table} WHERE ";
+                $sql .= $x;
                 if( ! $this->query($sql, array($value))->error()) {
                     return $this;
                 }
@@ -233,7 +256,7 @@ class Database
      * @param      int $id
      * @param      array $fields
      */
-    public function update($table, $id, $fields = array()) 
+    public function update($table, $id, $fields = array(), $field = 'id') 
     {
         //Check if fields has any value
         if(count($fields)) {
@@ -248,7 +271,7 @@ class Database
                 $x++;
             }            
             
-            $sql = "UPDATE {$table} SET {$set} WHERE id = {$id}";
+            $sql = "UPDATE {$table} SET {$set} WHERE {$field} = {$id}";
 
             if( ! $this->query($sql, $fields)->error()) {
                 return true;

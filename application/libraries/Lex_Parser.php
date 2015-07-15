@@ -14,6 +14,12 @@ class LexParsingException extends Exception { }
 // class Parser
 class Lex_Parser
 {
+    
+    public static function pass()
+    {
+        echo 'Autoloader Found!';
+    }
+    
     // CMS Canvas allow php
     // protected $allowPhp = false;
     protected $allowPhp = true;
@@ -71,14 +77,14 @@ class Lex_Parser
             // So you can call local variables from within blocks.
             $data = array_merge(self::$data, $data);
 
-            // Since this is not the first time parse() is called, it's most definately a callback,
+            // Since this is not the first time parse() is called, it's most definitely a callback,
             // let's store the current callback data with the the local data
             // so we can use it straight after a callback is called.
             self::$callbackData = $data;
         }
 
         // The parseConditionals method executes any PHP in the text, so clean it up.
-        if (! $allowPhp) {
+        if ( ! $allowPhp) {
             $text = str_replace(array('<?', '?>'), array('&lt;?', '?&gt;'), $text);
         }
 

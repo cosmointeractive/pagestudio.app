@@ -1,15 +1,59 @@
 <?php include APPPATH . 'views/header_view.php'; ?>
-    <div id="content">
-        
-        <p><?php echo $bread; ?></p>
-        <h1><?php echo $page['title']; ?></h1>
-        
+    <div class="row" style="padding:30px 0">
         <?php 
-        foreach($entries as $entry){
-            echo '<a href="'.BASE_URL.'entries/edit/'.$entry->id.'">' . $entry->post_title . '</a><br />';
-        } 
-        ?>
-        
+        if(Session::exists('success')) {
+            echo '
+            <div style="padding:0 20px">
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    ' . Session::flash('success') . '
+                </div>
+            </div>';
+        }
+        if( isset($errors)) {            
+            foreach($errors as $error) {
+                echo '<div class="alert alert-danger">' . $error . '</div>';
+            }
+        }
+        ?>        
+        <div class="col-lg-12">
+            <table id="make-searchable-5" class="table table-bordered table-hover table-striped table-white tablesorter no-side-borders">
+                <thead>
+                    <tr>
+                        <th width="34" align="center"><input name="fields[]" value="" type="checkbox"></th>
+                        <th width="400"><b>Title</b> </th>
+                        <th width="200"><b>Info</b></th>
+                        <th><b>Preview</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($posts as $post) : ?>
+                    <tr>
+                        <td class="sorting_1" align="center"><input name="fields[]" value="" type="checkbox"></td>
+                        <td class="profile-detail">
+                            <div>
+                                <a href="<?php echo BASE_URL . 'entries/edit/' . $post->id;?>"><?php echo $post->post_title; ?></a>
+                            </div>
+                            <div class="action">
+                                <a class="btn btn-default btn-xs" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a class="btn btn-success btn-xs" title="Approved"><span class="glyphicon glyphicon-ok"></span></a>
+                                <a class="btn btn-default btn-xs" href="<?php echo BASE_URL . 'entries/delete/' . $post->id;?>" title="Delete">
+                                    <span class="glyphicon glyphicon-trash"></span></a>
+                            </div>
+                        </td>
+                        <td>
+                            Editor: Cosmo Mathieu
+                            <div class="mic-info">
+                                Last edited on: <?php echo strtotime_date($post->post_modified, 'D, M jS, Y'); ?><br />
+                                Created on: <?php echo strtotime_date($post->post_date, 'm/d/Y'); ?>
+                            </div>
+                        </td>
+                        <td><a href="<?php echo BASE_URL . $post->post_slug;?>" target="_blank">View page</a></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div><!-- // .col-lg-12 -->
     </div>
 <?php include APPPATH . 'views/footer_view.php'; 
 

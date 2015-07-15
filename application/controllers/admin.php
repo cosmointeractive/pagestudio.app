@@ -25,6 +25,12 @@ class Admin extends MY_Controller
         // no special book is requested, we'll show a list of all available books
 		$template = $this->loadView('main_view');
         $template->set('bread', $bc->makeBread());
+        $template->set('page', array(
+            'title' => 'Welcome',
+            'heading' => '',
+            'description' => 'This is your dashboard',
+            'icon' => '<i class="icon x32 icon-open-book"></i>'
+        ));
 		$template->render();
 	}
     

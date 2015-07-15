@@ -11,7 +11,7 @@
  * http://codeigniter.com for further improvement and reliability. 
  *
  * @package     PageStudio
- * @author      Cosmo Mathieu <cosmo@cimwebdesigns.com>   
+ * @author      Cosmo Mathieu <cosmo@cosmointeractive.co>   
  */
  
 // ------------------------------------------------------------------------
@@ -94,7 +94,14 @@ final class Login extends Controller
                     } 
                 }
             }
-        } 
+        } else if( Session::get('session_id')) { 
+            /**
+             * Redirect the user to the default controller if already logged in.
+             * @note      Consider adding feature that checks if the cookie and 
+             *            session exists and login user if not expired. 
+             */ 
+            $this->redirect(Config::get('admin_controller'));
+        }
     }
     
     // --------------------------------------------------------------------
@@ -173,7 +180,7 @@ final class Login extends Controller
         $template = $this->loadView('login/login_view');
         $template->set('page', array(
             'title' => 'Login',
-            'heading' => 'The login page',
+            'heading' => 'Log In',
             'description' => 'This is the login page'
         ));
         $template->set('errors', $this->_errors);
@@ -264,7 +271,7 @@ final class Login extends Controller
             return false;
         }	
 	}
-
+    
     // --------------------------------------------------------------------
 
     /**

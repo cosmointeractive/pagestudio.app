@@ -31,7 +31,7 @@ class Input
      * @param       string $type Value to check for
      * @return      string Return a string or nothing if empty
      */
-    public static function exists($type = 'post')
+    public static function exists($type = 'post', $formField = '')
     {
         switch($type) {
             case 'post':
@@ -40,10 +40,34 @@ class Input
             case 'get':
                 return ( ! empty($_GET)) ? true : false;
                 break;
+            case 'upload':
+                return self::fileUploaded($formField);
+                break;
             default: 
                 return false;
                 break;
         }
+    }
+    
+    /**
+     * Check whether or not $_FILES is empty
+     *
+     * @access     public 
+     * @param      string $formField Upload field name
+     * @return     bool 
+     */
+    public static function fileUploaded($formField)
+    {
+        if(empty($_FILES)) {
+            return false;       
+        } 
+        if( ! file_exists($_FILES[$formField]['tmp_name']) 
+            || !is_uploaded_file($_FILES[$formField]['tmp_name'])
+        ) {
+            // $errors['FileNotExists'] = true;
+            return false;
+        }   
+        return true;
     }
     
     /** 

@@ -31,6 +31,7 @@ class View
      * @access     private
      */
 	private $pageVars = array();
+    
     /**
      *
      * @access     private
@@ -61,12 +62,29 @@ class View
     {
         $this->pageLevelCSS = $array;
     }
+    
+    /**
+     * Provides a way to add page level view css files
+     * 
+     * @access      Public 
+     */
+    public function addJS($array = '')
+    {
+        $this->pageLevelJS = $array;
+    }
         
     // Return the page level css files in an array
     public function pageCSS()
     {
-        return ! empty($this->pageLevelCSS) ? $this->pageLevelCSS : '';
+        return ( ! empty($this->pageLevelCSS)) ? $this->pageLevelCSS : '';
     }
+    
+    // Return the page level js files in an array
+    public function pageJS()
+    {
+        return ( ! empty($this->pageLevelJS)) ? $this->pageLevelJS : '';
+    }
+    
     
     /**
      * Returns the content of the model to the viewer

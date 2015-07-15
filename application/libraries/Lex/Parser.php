@@ -10,7 +10,7 @@
 // CMS Canvas added exception class to prevent creating new file
 class LexParsingException extends Exception { }
 
-// CMS Canvas added Lex to class name to prvent using namespaces
+// CMS Canvas added Lex to class name to prevent using namespaces
 // class Parser
 class Lex_Parser
 {

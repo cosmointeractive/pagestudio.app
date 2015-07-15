@@ -1,0 +1,17 @@
+@media screen and (max-width: 820px) {
+  img {
+    width: 100%;
+    height:auto;
+  }
+}
+h1, h2, h3, h4, h5, h6, p { color: #333333 !important; }
+body.mceContentBody, .mce-content-body {
+  /* font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif; */
+  font-family: 'Georgia',"Times New Roman", "Bitstream Charter", Times,serif;
+  font-size:14px;
+  line-height: 21px;
+  margin: 10px;
+}
+a {
+    color: #3F9ED8;
+}

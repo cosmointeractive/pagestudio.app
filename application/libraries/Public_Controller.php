@@ -50,9 +50,57 @@ class Public_Controller extends Controller
 	{
         $split = explode('/', $name);
         $module = $split[0];
-        $moduleController = $split[1];
-		require APPPATH .'modules/'. strtolower($module) .'/controllers/'. strtolower($moduleController) .'.php';
+        $method = $split[1];
+		$file = APPPATH .'modules/'. strtolower($module) .'/controllers/'. strtolower($method) .'.php';
+        if( ! file_exists($file)) {
+            $this->redirect('error');
+        }
+        if( ! method_exists($file, $method = 'index')) {
+            // $this->redirect('error'); 
+        }
+        
+        require $file;
 	}
+    
+    /**
+     * Method to manually load models
+     *
+     * @access      public
+     * @var         array $data The Module name and Model name.
+     */
+    public function loadModel($data)
+	{
+        $module = $data['module'];
+        $name   = ucfirst($data['model']);
+        
+		require APPPATH . 'modules/' . $module .'/models/'. strtolower($name) .'.php';
+
+		$model = new $name;
+		return $model;
+	}
+    
+    public function loadView($name)
+	{
+		$view = new MY_View($name);
+		return $view;
+	}
+    
+    /**
+     * Method to load a helper file 
+     *
+     * @param       string $name
+     * @return      mixed
+     */
+    public function loadHelper($name)
+    {        
+        $file = APPPATH . 'helpers/' . strtolower($name) . '_helper.php';
+        
+        if( file_exists($file) ) {            
+            require_once $file;
+        } else {
+            return false;
+        }
+    }
     
     /**
      * Method to check the method being requested exists

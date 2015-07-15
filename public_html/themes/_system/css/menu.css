@@ -1,0 +1,473 @@
+/*
+ * Remove all borders
+ */
+/* 
+* {
+  -webkit-border-radius: 0 !important;
+     -moz-border-radius: 0 !important;
+          border-radius: 0 !important;
+}  
+*/
+/*
+ * Remove borders for form fields
+ */
+.form-control {
+  -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+      border-radius: 0 !important;
+}
+/*
+ * Modal - Hack to make a fullscreen
+ */
+.modal-dialog.full-screen {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  top: 0;
+  left: 0;
+}
+/*
+ * Top navigation and button 
+ */
+.navbar.navbar-static-top {
+  margin:0;
+}
+.header .navbar .sidebar-toggle {
+  float: left;
+  padding: 9px 10px;
+  margin-top: 5px;
+  margin-right: 0;
+  margin-bottom: 8px;
+  margin-left: 0px;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid transparent; 
+  -webkit-border-radius: 0 !important; 
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
+}
+.header .navbar .sidebar-toggle .icon-bar {
+  display: block;
+  height: 2px;
+  width: 22px;
+  margin-top: 4px;
+  border: 1px solid #aaa;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.header .navbar .sidebar-toggle:hover .icon-bar {
+  border: 1px solid #111;
+}
+.header .navbar .sidebar-toggle:focus {
+  border: none;
+}
+
+/*
+ * Panel default styles
+ * --------------------------------------------------------------------
+ */
+div[class^="panel"] {
+  border-radius: 0 !important;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.panel {  
+}
+.panel h1 {
+  color: #333;
+  font-size: 16px;
+  line-height: 16px;
+  margin:0 0 5px 0;
+}
+.panel h2 {
+  color: #a1a1a1;
+  font-size: 14px;
+  line-height: 16px;
+  margin:0 0 5px 0;
+}
+.panel h3.panel-title {
+  color: #a1a1a1;
+  font-size: 13px;
+  line-height: 16px;
+  margin:0 0 0px 0;
+}
+.panel .btn {
+  padding:4px 10px;
+  background: #fff;
+  border-color: #ebebeb;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+.panel .btn,
+.panel .btn a,
+.panel .btn i { color: #bababa;font-size: 10px; }
+/*
+ * Panel-default
+ */
+.panel-default {
+  color: #ababab;
+  border-color: #ebebeb;
+}
+.panel-default > .panel-heading {
+  color: #ababab;
+  background-color: #fcfcfc;
+  border-color: #ebebeb;
+}
+.panel-default > .panel-heading + .panel-collapse .panel-body {
+}
+.panel-default > .panel-body { 
+  padding: 15px 15px 15px;
+}
+.panel-default > .panel-footer + .panel-collapse .panel-body {
+    
+}
+.panel-default > .panel-footer { 
+  color: #ababab;
+  border-color: #f0f0f0;
+  background-color: #fbfbfb;
+}
+.panel-default .nav-tabs { 
+  padding-left: 15px; 
+  margin-bottom: 20px;
+}
+/*
+ * Panel Primary
+ */
+.panel.panel-primary {
+  border-color: #efefef;
+  border-left: 3px solid #4f93d0;
+}
+.panel.panel-primary > .panel-heading {
+  background-color: #fcfcfc;
+  border-color: #ebebeb;
+}
+.panel.panel-primary > .panel-heading + .panel-collapse .panel-body {
+}
+.panel.panel-primary > .panel-body { 
+  padding: 15px 15px 15px;
+}
+.panel.panel-primary > .panel-footer + .panel-collapse .panel-body {
+    
+}
+.panel.panel-primary > .panel-footer { 
+  color: #ababab;
+  border-color: #f0f0f0;
+  background-color: #fbfbfb;
+}
+.panel.panel-primary .nav-tabs { 
+  padding-left: 15px; 
+  margin-bottom: 20px;
+}
+/*
+ * Panel danger
+ */
+.panel-danger {
+  border-color: #efefef;
+  border-left: 3px solid #E24F48 /* #D6303A */;
+}
+.panel-danger > .panel-heading {
+  background-color: #fcfcfc;
+  border-color: #ebebeb;
+}
+.panel-danger > .panel-heading + .panel-collapse .panel-body {
+}
+.panel-danger > .panel-body { 
+  padding: 15px 15px 15px;
+}
+.panel-danger > .panel-footer + .panel-collapse .panel-body {
+    
+}
+.panel-danger > .panel-footer { 
+  color: #ababab;
+  border-color: #f0f0f0;
+  background-color: #fbfbfb;
+}
+.panel-danger .nav-tabs { 
+  padding-left: 15px; 
+  margin-bottom: 20px;
+}
+/*
+ * Panel Success
+ */
+.panel.panel-success {
+  border-color: #efefef;
+  border-left: 3px solid #77A700;
+}
+.panel.panel-success > .panel-heading {
+  background-color: #FCF8E3;
+  border-color: #fbfbfb;
+}
+.panel.panel-success > .panel-heading + .panel-collapse .panel-body {
+}
+.panel.panel-success > .panel-body { 
+  padding: 15px 15px 15px;
+}
+.panel.panel-success > .panel-footer + .panel-collapse .panel-body {
+    
+}
+.panel.panel-success > .panel-footer { 
+  color: #ababab;
+  border-color: #f0f0f0;
+  background-color: #fbfbfb;
+}
+.panel.panel-success .nav-tabs { 
+  padding-left: 15px; 
+  margin-bottom: 20px;
+}
+/*
+ * Panel warning
+ */
+.panel.panel-warning {
+  border-color: #efefef;
+  border-left: 3px solid #FAEBCC;
+}
+.panel.panel-warning > .panel-heading {
+  background-color: #FCF8E3;
+  border-color: #FAEBCC;
+}
+.panel.panel-warning > .panel-heading + .panel-collapse .panel-body {
+}
+.panel.panel-warning > .panel-body { 
+  padding: 15px 15px 15px;
+}
+.panel.panel-warning > .panel-footer + .panel-collapse .panel-body {
+    
+}
+.panel.panel-warning > .panel-footer { 
+  color: #ababab;
+  border-color: #f0f0f0;
+  background-color: #fbfbfb;
+}
+.panel.panel-warning .nav-tabs { 
+  padding-left: 15px; 
+  margin-bottom: 20px;
+}
+/*
+ * Panel with tabs
+ */
+/*Panel tabs*/
+.panel-tabs {
+    position: relative;
+    bottom: 26px;
+    clear:both;
+    border-bottom: 1px solid transparent;
+}
+.panel-tabs > li {
+    float: left;
+    margin-bottom: -1px;
+}
+.panel-tabs > li > a {
+  height: 37px;
+    margin-right: 2px;
+    margin-top: 0px;
+    line-height: .85;
+    border: 1px solid transparent;
+    color: #ababab;
+}
+.panel-tabs > li > a:hover {
+    border-color: transparent;
+    color: #333;
+    background-color: transparent;
+}
+.panel-tabs > li.active > a,
+.panel-tabs > li.active > a:hover,
+.panel-tabs > li.active > a:focus {
+    color: #333;
+    cursor: default;
+    background-color: #fff;
+    border-color: #ebebeb;
+    border-bottom-color: #fff;
+}
+
+/*
+ * Tables
+ */ 
+.table-white {
+  background-color: #fff;
+}
+.table-hover > tbody > tr:hover > td,
+.table-hover > tbody > tr:hover > th {
+  background-color: #F7FCFE;
+ }
+.table-hover > tbody > tr:hover > td:first-child,
+.table-hover > tbody > tr:hover > th:first-child {
+  border-left: 0px solid #24A1CE;
+}
+/*
+ * Custom tables
+ */
+.table th {
+  padding: 20px 0 20px 10px !important;
+  border: 0 !important; 
+  border-top: 1px solid #ececec !important;
+}
+.table td { 
+  padding: 20px 0 20px 10px !important;
+  border: 0 !important; 
+  border-top: 1px solid #ececec !important;
+}
+.table td.no-left {
+  padding-left: 0 !important;
+}
+.table.no-side-borders {
+  border-left: 0 !important;
+  border-right: 0 !important;
+}
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+    background-color: #fbfbfb !important;
+}
+
+/*
+ * Plugins Override - DataTables
+ * ------------------------------------------
+ */
+/* DataTables Overrides */
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting_asc_disabled,
+table.dataTable thead .sorting_desc_disabled {
+    background: transparent;
+}
+
+table.dataTable thead .sorting_asc:after {
+    content: "\f0de";
+    float: right;
+    font-family: fontawesome;
+}
+
+table.dataTable thead .sorting_desc:after {
+    content: "\f0dd";
+    float: right;
+    font-family: fontawesome;
+}
+
+table.dataTable thead .sorting:after {
+    /* content: "\f0dc"; */
+    float: right;
+    font-family: fontawesome;
+    color: rgba(50,50,50,.5);
+}
+.dataTables_length label {
+  margin-left: 15px;
+}
+.dataTables_length label > select {
+  height: 25px;
+  padding: 2px 3px 2px 5px;
+  border-radius: 0;
+}
+.dataTables_filter label {
+  margin-right: 15px;
+}
+.dataTables_filter label > input[type=search] {
+  height: 20px;
+  margin-left: 10px;
+  padding: 2px 3px 2px 5px;
+  border-radius: 0;
+}
+.dataTables_info {
+  margin-left: 15px;
+}
+.dataTables_paginate {
+  margin-top: 10px !important;
+  margin-right: 15px !important;
+}
+
+/*
+ * Widgets
+ * --------------------------------------------------------------------
+ */
+#back-to-bootsnipp {
+    position: fixed;
+    top: 10px; right: 10px;
+}
+.c-search > .form-control {
+   border-radius: 0px;
+   border-width: 0px;
+   border-bottom-width: 1px;
+   font-size: 1.3em;
+   padding: 12px 12px;
+   height: 44px;
+   outline: none !important;
+}
+.c-search > .form-control:focus {
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none;
+}
+.c-search > .input-group-btn .btn {
+   border-radius: 0px;
+   border-width: 0px;
+   border-left-width: 1px;
+   border-bottom-width: 1px;
+   height: 44px;
+}
+.c-list {
+    padding: 0px;
+    min-height: 44px;
+}
+.title {
+    display: inline-block;
+    font-weight: bold;
+    padding: 5px 15px;
+}
+ul.c-controls {
+    list-style: none;
+    margin: 0px;
+    min-height: 44px;
+}
+ul.c-controls li {
+    margin-top: 8px;
+    float: left;
+}
+ul.c-controls li a {
+    padding: 11px 10px 6px;   
+}
+ul.c-controls li a i {
+    min-width: 24px;
+    text-align: center;
+}
+
+ul.c-controls li a:hover {
+    background-color: rgba(51, 51, 51, 0.2);
+}
+
+.c-toggle {
+    font-size: 1.7em;
+}
+
+.name {
+    font-weight: 700;
+}
+
+.c-info {
+    padding: 5px 10px;
+    font-size: 1.25em;
+}
+/*
+ * Widgets - Users table
+ * ------------------------------------------
+ */
+.mic-info { color: #666666;font-size: 11px; }
+.action { margin-top:5px; }
+.widget .comment-text { font-size: 12px; }
+.action .btn { 
+  border-radius:0px;
+}
+.action .btn span.glyphicon {
+  color: #BABABA;
+}
+.action .btn.btn-success span.glyphicon {
+  color: #fff;
+}
+

@@ -3,17 +3,17 @@
  * PageStudio
  *
  * A web application for managing website content. For use with PHP 5.4+
- * 
- * This application is based on the PHP framework, 
- * PIP http://gilbitron.github.io/PIP/. PIP has been greatly altered to 
- * work for the purposes of our development team. Additional resources 
+ *
+ * This application is based on the PHP framework,
+ * PIP http://gilbitron.github.io/PIP/. PIP has been greatly altered to
+ * work for the purposes of our development team. Additional resources
  * and concepts have been borrowed from CodeIgniter,
- * http://codeigniter.com for further improvement and reliability. 
+ * http://codeigniter.com for further improvement and reliability.
  *
  * @package     PageStudio
- * @author      Cosmo Mathieu <cosmo@cimwebdesigns.com>   
+ * @author      Cosmo Mathieu <cosmo@cimwebdesigns.com>
  */
- 
+
 // ------------------------------------------------------------------------
 
 /**
@@ -21,7 +21,7 @@
  */
 if( ! isset($_SESSION)) {
     session_start();
-}   
+}
 
 /**
  *---------------------------------------------------------------
@@ -38,11 +38,11 @@ if( ! isset($_SESSION)) {
  *     testing
  *     production
  *
- * NOTE: If you change these, also change the error_reporting() code below
+ * @note If you change these, also change the error_reporting() code below
  *
  */
 	define('ENVIRONMENT', 'development');
-    
+
 /**
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -57,7 +57,7 @@ if (defined('ENVIRONMENT')) {
 		case 'development':
 			error_reporting(E_ALL);
 		break;
-	
+
 		case 'testing':
 		case 'production':
 			error_reporting(0);
@@ -116,7 +116,7 @@ if (defined('ENVIRONMENT')) {
     // Is the system path correct?
     if ( ! is_dir($system_path)) {
         exit("Your system folder path does not appear to be set correctly. Please open the following file and correct this: ".pathinfo(__FILE__, PATHINFO_BASENAME));
-    }   
+    }
 
 /**
  *-------------------------------------------------------------------
@@ -125,7 +125,7 @@ if (defined('ENVIRONMENT')) {
  */
 	// The name of THIS file
 	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
-    
+
 	// Path to the system folder
 	define('BASEPATH', str_replace("\\", "/", $system_path));
 
@@ -134,19 +134,18 @@ if (defined('ENVIRONMENT')) {
 
 	// Name of the "system folder"
 	define('SYSDIR', trim(strrchr(trim(BASEPATH, '/'), '/'), '/'));
-    
+
 	// The path to the "application" folder
 	if(is_dir($application_folder)) {
 		define('APPPATH', $application_folder.'/');
-	}
-	else {
+	} else {
 		if( ! is_dir(BASEPATH.$application_folder.'/')) {
 			exit("Your application folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
 		}
 
 		define('APPPATH', BASEPATH.$application_folder.'/');
-	}    
-    
+	}
+
 // Includes
 require APPPATH . 'config/config.php';
 require APPPATH . 'config/autoload.php';
@@ -155,6 +154,9 @@ require SYSDIR  . '/pip.php';
 
 // Define base URL
 define('BASE_URL', Config::get('base_url'));
+
+// Define absolute path
+define('ABSPATH', str_replace('system/', '', BASEPATH));
 
 /**
  *--------------------------------------------------------------------

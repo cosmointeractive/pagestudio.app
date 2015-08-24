@@ -54,6 +54,9 @@ class Pages extends Main
          */
         $permalink = ( Url::segment(0)) ? Url::segment(0) : 'home';
         
+        /**
+         * Load the cache content if it exists, else load from the database
+         */
         if($c->isCached($permalink)) {
             $the_content = $c->retrieve($permalink);
             

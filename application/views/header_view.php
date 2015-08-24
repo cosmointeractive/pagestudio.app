@@ -18,18 +18,18 @@
     <!-- stylesheets
 	============================================= -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>public_html/themes/_system/css/style.css" media="screen" rel="stylesheet">    
-    <link href="<?php echo BASE_URL; ?>public_html/themes/_system/css/menu.css" media="screen" rel="stylesheet">    
+    <link href="<?php echo BASE_URL; ?>public_html/themes/_system/css/style.css" media="screen" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>public_html/themes/_system/css/menu.css" media="screen" rel="stylesheet">
     <link href="<?php echo BASE_URL; ?>public_html/themes/_system/css/ui-icons.css" media="screen" rel="stylesheet">
+    <link href="http://localhost/php_playground/fullcalendar-2.1.1/lib/jquery-ui.min.css" media="screen" rel="stylesheet">
     <?php 
     // Display page level stylesheets set in the page level controller classes
     if($this->pageCSS()) {
         foreach( $this->pageCSS() as $stylesheet ) {
-            echo '<link rel="stylesheet" href="' . $stylesheet . '" type="text/css" />' . "\n";
+            echo '<link href="' . $stylesheet . '" rel="stylesheet">' . "\n";
         }; 
     }
-    ?>    
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>public_html/themes/_system/css/style.css" type="text/css" media="screen" />
+    ?>
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -85,6 +85,13 @@
                     <a href="#" class="nav-main-tooltip-right" title="View&nbsp;comments" data-toggle="tab"><i class="icon flat icon-comment-o"></i></a>
                 </li>
                 <li <?php 
+                    if(Url::segment(2) === 'calendar') {
+                        echo 'class="active"';
+                    }
+                ?>>
+                    <a href="#nav-sub-calendar" class="nav-main-tooltip-right" title="Calendar" data-toggle="tab"><i class="icon flat icon-calendar-o"></i></a>
+                </li>
+                <li <?php 
                     if(Url::segment(0) === 'users') {
                         echo 'class="active"';
                     }
@@ -111,28 +118,21 @@
         <!-- Add class .collapse-options-pane to close options-pane -->
         <div class="workspace open-left-pane <?php if(options_pane_widgets()) echo 'open-options-pane'; ?>">
             <header class="header">
-                <!-- Header Navbar: style can be found in header.less -->
-                <nav class="navbar navbar-static-top" role="navigation">
-                    <!-- Sidebar toggle button-->
-                    <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <div class="navbar-collapse">
-                        <!-- <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-                                    <i class="glyphicon glyphicon-user"></i> Admin <span class="caret"></span></a>
-                                <ul id="g-account-menu" class="dropdown-menu" role="menu">
-                                    <li><a href="#">My Profile</a></li>
-                                    <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul> -->
-                    </div>
-                </nav>
+                <div class="content-header">
+                    <h1>
+                        <?php echo ( ! empty($page['icon'])) ? $page['icon'] : ''; ?>
+                        <?php echo ( ! empty($page['title'])) ? $page['title'] : 'Page Studio'; ?>
+                        <small><?php echo ( ! empty($page['description'])) ? $page['description'] : '&nbsp;&nbsp;'; ?></small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <!--
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">Calendar</li>
+                        -->
+                        <?php if(isset($bread)) echo '<i class="fa fa-home"></i> '. $bread; ?> 
+                        <?php if(isset($top_action_buttons)) echo $top_action_buttons; ?>
+                    </ol>                        
+                </div>
             </header>
         
             <!-- #main section -->
@@ -298,10 +298,10 @@
                                 }
                             ?>">
                                 <li class="heading">
-                                    Users
+                                    Users                                    
                                 </li>
-                                <li class="line"></li>
-                                <li>
+                                <li class="line"><br /></li>
+                                <li <?php if(Url::segment(0) === 'users' && ! Url::segment(1)) echo 'class="active"'; ?>>
                                     <a href="<?php echo BASE_URL . 'users'?>">All Users</a>
                                     <span class="nav-sub__config"><i class="fa fa-users"></i></span>
                                 </li>
@@ -309,8 +309,8 @@
                                     <a href="<?php echo BASE_URL . 'users/add/'?>">Add New</a>
                                     <span class="nav-sub__config"><i class="fa fa-plus-circle"></i></span>
                                 </li>						
-                                <li>
-                                    <a href="index.php?page_id=15&amp;action=modify&amp;my-account-settings=true&amp;uid=1" alt="Change account settings">Your Profile</a>
+                                <li <?php if(Url::segment(0) === 'users' && (Url::segment(2) === Session::get(Config::get('session/user_id')))) echo 'class="active"'; ?>>
+                                    <a href="<?php echo BASE_URL . 'users/edit/' . Session::get(Config::get('session/user_id')); ?>" alt="Change account settings">Your Profile</a>
                                     <span class="nav-sub__config"><i class="fa fa-user"></i></span>
                                 </li>
                                 <li class="line"></li>
@@ -322,6 +322,32 @@
                                     <span class="nav-sub__config"><i class="fa fa-users"></i></span>
                                 </li>
                             </ul>
+                            <!-- Calendar -->
+                            <ul id="nav-sub-calendar" class="nav-sub <?php 
+                                if(Url::segment(2) === 'calendar') {
+                                    echo 'active';
+                                }
+                            ?>">
+                                <li class="heading">
+                                    Calendar
+                                </li>
+                                <li class="menu-widget">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            Posts are entries listed in reverse chronological order on the blog home page or on the posts page. 
+                                        </div>
+                                    </div>
+                                </li>
+                                <li <?php if(Url::segment(0) === 'addons' && Url::segment(2) === 'calendar' && ! Url::segment(3)) echo 'class="active"'; ?>>
+                                    <a href="<?php echo BASE_URL . 'addons/load/calendar/'?>">Calendar</a>
+                                    <span class="nav-sub__config"><i class="fa fa-calendar"></i></span>
+                                </li>
+                                <li <?php if(Url::segment(0) === 'addons' && Url::segment(3) === 'table') echo 'class="active"'; ?>>
+                                    <a href="<?php echo BASE_URL . 'addons/load/calendar/table/'?>">Event List</a>
+                                    <span class="nav-sub__config"><i class="fa fa-bars"></i></span>
+                                </li>
+                            </ul>
+                            <!-- Entries and Categories -->
                             <ul id="nav-sub-posts" class="nav-sub <?php 
                                 if(Url::segment(0) === 'entries' || Url::segment(0) === 'categories') {
                                     echo 'active';
@@ -417,17 +443,3 @@
                 <!-- workspace -->
                 <div class="edit-pane">
                     <div id="editPane" <?php if( ! empty( $page['body_class'] )) echo body_class($page['body_class']); ?>>
-                        <section class="content-header">
-                            <h1>
-                                <?php echo ( ! empty($page['icon'])) ? $page['icon'] : ''; ?>
-                                <?php echo ( ! empty($page['title'])) ? $page['title'] : 'Page Studio'; ?>
-                                <small><?php echo ( ! empty($page['description'])) ? $page['description'] : '&nbsp;&nbsp;'; ?></small>
-                            </h1>
-                            <ol class="breadcrumb">
-                                <!--
-                                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                                <li class="active">Calendar</li>
-                                -->
-                                <i class="fa fa-home"></i> <?php echo $bread; ?>
-                            </ol>                        
-                        </section>

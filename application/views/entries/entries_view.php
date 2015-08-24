@@ -23,6 +23,7 @@
                         <th width="34" align="center"><input name="fields[]" value="" type="checkbox"></th>
                         <th width="400"><b>Title</b> </th>
                         <th width="200"><b>Info</b></th>
+                        <th width="100"><b>Status</b></th>
                         <th><b>Preview</b></th>
                     </tr>
                 </thead>
@@ -32,7 +33,7 @@
                         <td class="sorting_1" align="center"><input name="fields[]" value="" type="checkbox"></td>
                         <td class="profile-detail">
                             <div>
-                                <a href="<?php echo BASE_URL . 'entries/edit/' . $post->id;?>"><?php echo $post->post_title; ?></a>
+                                <h4><a href="<?php echo BASE_URL . 'entries/edit/' . $post->id;?>"><?php echo $post->post_title; ?></a></h4>
                             </div>
                             <div class="action">
                                 <a class="btn btn-default btn-xs" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
@@ -48,7 +49,8 @@
                                 Created on: <?php echo strtotime_date($post->post_date, 'm/d/Y'); ?>
                             </div>
                         </td>
-                        <td><a href="<?php echo BASE_URL . $post->post_slug;?>" target="_blank">View page</a></td>
+                        <td><?php echo ucfirst( $post->post_status );?></td>
+                        <td><a href="<?php echo BASE_URL . $post->post_slug;?>" target="_blank">Preview</a></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

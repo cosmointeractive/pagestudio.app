@@ -32,7 +32,7 @@ class Entries_model extends Model
     public function getEntries()
 	{
         $query = Database::getInstance()->query(
-            "SELECT id, post_title, post_slug, post_date, post_modified FROM cimp_posts 
+            "SELECT id, post_title, post_slug, post_date, post_modified, post_status FROM cimp_posts 
             WHERE post_type = ?", array('post')
         );
         

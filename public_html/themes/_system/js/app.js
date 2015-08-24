@@ -9,7 +9,7 @@
  * @copyright  Cosmo Interactive (c) 2014 http://www.cosmointeractive.co/
  * @license    MIT
  * @version    0.1.0
- * @modified   07/03/2015
+ * @modified   07/28/2015
  *
  * ---------------------------
  * Table of Contents
@@ -134,6 +134,37 @@ $(function() {
         }
     });
     
+    // /**
+     // * Prompt to save before navigating away from page.
+     // * @see      http://www.java2s.com/Tutorial/JavaScript/0200__Form/TextareaonChange.htm
+     // */
+    // $('textarea.mceAdvanced').change(function() {
+        // if( $(this).val() != "" ) {
+            // window.onbeforeunload = "Are you sure you want to leave?";
+        // }
+    // });
+    
+    /**
+     * Reset form after bootstrap modal closes
+     * 
+	 * @author     Cosmo Mathieu <cosmo@cosmointeractive.co>
+	 */ 
+    $('.modal').on('hidden.bs.modal', function(){
+        $(this).find('form')[0].reset();
+        $('#display').text("");
+    });
+    
+});
+
+$(function () {
+	// $('#datetimepicker6').datetimepicker();
+	// $('#datetimepicker7').datetimepicker();
+	// $("#datetimepicker6").on("dp.change", function (e) {
+		// $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+	// });
+	// $("#datetimepicker7").on("dp.change", function (e) {
+		// $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+	// });
 });
 
 /**
@@ -146,6 +177,24 @@ $(document).ready(function(){
     $(".nav-main-tooltip-right").tooltip({placement : 'right'});
     $(".nav-main-tooltip-top").tooltip({placement : 'top'});
     $(".nav-main-tooltip-bottom").tooltip({placement : 'bottom'});
+    
+    /**
+     * Linked datetime pickers
+     * @note    Requires the moment library 
+     */
+    $('#datetime-picker-a').datetimepicker({
+        'format' : 'YYYY/MM/DD HH:mm A',
+    }).on('dp.change', function(e){
+        // https://github.com/eternicode/bootstrap-datepicker/issues/57
+        $('#datetime-picker-b').data("DateTimePicker").minDate(e.date);
+    });
+
+    // Set default date for time picker after they are clicked
+    $('#datetime-picker-b').datetimepicker({
+        'format' : 'YYYY/MM/DD HH:mm A'
+    }).on("dp.change", function (e) {
+        $('#datetime-picker-a').data("DateTimePicker").maxDate(e.date);
+    });
 });
     
 /*
@@ -216,8 +265,7 @@ $(document).ready(function(){
          */
         // var getUrl = window.location;
         // var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1] + getUrl.pathname.split('/')[2];
-		$("#page_slider_list").sortable(
-		{
+		$("#page_slider_list").sortable({
 			handle: ".handle",
 			// placeholder: "portlet-placeholder ui-corner-all",
 			update : function () { 
@@ -250,6 +298,19 @@ $(document).ready(function(){
 	});
 })(window.jQuery);
 
+/**
+ * Make iframes full height of browser window
+ * 
+ * @author     Cosmo Mathieu <cosmo@cosmointeractive.co>
+ * @source     http://stackoverflow.com/questions/20125340/can-i-use-jquery-to-resize-an-iframe-to-fill-the-remaining-window-space
+ */
+$(window).on('load resize', function(){
+    $window = $(window);
+    $('iframe.fullheight').height(function(){
+        return $window.height()-$(this).offset().top;   
+    });
+});
+
 /*
  * --------------------------------------------------------------------------
  * DOCUMENT READY
@@ -264,16 +325,11 @@ function confirmSubmit() {
 	return false;
 }
 
-// function myFunction() {
-    // document.getElementById("editor").submit();
-// }
-
 //custom_alert();
 //custom_alert("Display Message");
 //custom_alert("Display Message", "Set Title");
 
-/* function custom_alert(output_msg, title_msg)
-{
+/* function custom_alert(output_msg, title_msg){
 	if (!title_msg)
 		title_msg = 'Alert';
 
@@ -295,8 +351,7 @@ function confirmSubmit() {
 
 /*
  * Confirm Action Warning 
-function confirm_delete(agree) 
-{
+function confirm_delete(agree) {
 	// Get error msg from function 
 	if(agree !== undefined)
 		return confirm(agree);
@@ -372,127 +427,6 @@ function selectToggle(toggle, form) {
  *	 
  *	})(jQuery);
  */ 
-/* (function($){
-	// Easy pie charts
-	var calendar = $('#calendar').fullCalendar({
-	header: {
-		left: 'prev,next',
-		center: 'title',
-		right: 'today month,basicWeek,basicDay'
-	},
-	selectable: true,
-	selectHelper: true,
-	select: function(start, end, allDay) {
-		var title = prompt('Event Title:');
-		if (title) {
-			calendar.fullCalendar('renderEvent',
-				{
-					title: title,
-					start: start,
-					end: end,
-					allDay: allDay
-				},
-				true // make the event "stick"
-			);
-		}
-		calendar.fullCalendar('unselect');
-	},
-	droppable: true, // this allows things to be dropped onto the calendar !!!
-	drop: function(date, allDay) { // this function is called when something is dropped
-	
-		// retrieve the dropped element's stored Event Object
-		var originalEventObject = $(this).data('eventObject');
-		
-		// we need to copy it, so that multiple events don't have a reference to the same object
-		var copiedEventObject = $.extend({}, originalEventObject);
-		
-		// assign it the date that was reported
-		copiedEventObject.start = date;
-		copiedEventObject.allDay = allDay;
-		
-		// render the event on the calendar
-		// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-		$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-		
-		// is the "remove after drop" checkbox checked?
-		if ($('#drop-remove').is(':checked')) {
-			// if so, remove the element from the "Draggable Events" list
-			$(this).remove();
-		}
-		
-	},
-	editable: true,
-	defaultDate: '2014-06-12',
-	// US Holidays
-	events: [
-				{
-					gcalFeed: 'http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic',
-					color: '#00A65A',   // an option!
-					textColor: '#fff' // an option!
-				},
-				{
-					title: 'All Day Event',
-					start: '2014-06-01',
-					allDay: true
-				},
-				{
-					title: 'Long Event',
-					start: '2014-06-07T16:30:00',
-					end: '2014-06-10T13:30:00'
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: '2014-06-09T16:00:00'
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: '2014-06-16T16:00:00'
-				},
-				{
-					title: 'Meeting',
-					start: '2014-06-12T10:30:00',
-					end: '2014-06-12T12:30:00'
-				},
-				{
-					title: 'Lunch',
-					start: '2014-06-12T12:00:00'
-				},
-				{
-					title: 'Birthday Party',
-					start: '2014-06-13T07:00:00'
-				},
-				{
-					title: 'Click for Google',
-					url: 'http://google.com/',
-					start: '2014-06-28'
-				}
-			]
-	
-	});
-})(jQuery);
-$('#external-events div.external-event').each(function() {
-
-	// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-	// it doesn't need to have a start or end
-	var eventObject = {
-		title: $.trim($(this).text()) // use the element's text as the event title
-	};
-	
-	// store the Event Object in the DOM element so we can get to it later
-	$(this).data('eventObject', eventObject);
-	
-	// make the event draggable using jQuery UI
-	$(this).draggable({
-		zIndex: 999999999,
-		revert: true,      // will cause the event to go back to its
-		revertDuration: 0  //  original position after the drag
-	});
-	
-}); */
-
-
 
 
 /*
@@ -532,61 +466,3 @@ $('#external-events div.external-event').each(function() {
 	
 })();
  */
-
-/*
- * --------------------------------------------------------------------------
- * UItoTop jQuery Plugin 1.1
- * http://www.mattvarone.com/web-design/uitotop-jquery-plugin/
- * --------------------------------------------------------------------------
- */
-(function($){
-	$.fn.UItoTop = function(options) {
-
- 		var defaults = {
-			text: 'To Top',
-			min: 200,
-			inDelay:600,
-			outDelay:400,
-  			containerID: 'toTop',
-			containerHoverID: 'toTopHover',
-			scrollSpeed: 1200,
-			easingType: 'linear'
- 		};
-
- 		var settings = $.extend(defaults, options);
-		var containerIDhash = '#' + settings.containerID;
-		var containerHoverIDHash = '#'+settings.containerHoverID;
-		
-		$('body').append('<a href="#" id="'+settings.containerID+'">'+settings.text+'</a>');
-		$(containerIDhash).hide().click(function(){
-			$('html, body').animate({scrollTop:0}, settings.scrollSpeed, settings.easingType);
-			$('#'+settings.containerHoverID, this).stop().animate({'opacity': 0 }, settings.inDelay, settings.easingType);
-			return false;
-		})
-		.prepend('<span id="'+settings.containerHoverID+'"></span>')
-		.hover(function() {
-				$(containerHoverIDHash, this).stop().animate({
-					'opacity': 1
-				}, 600, 'linear');
-			}, function() { 
-				$(containerHoverIDHash, this).stop().animate({
-					'opacity': 0
-				}, 700, 'linear');
-			});
-					
-		$(window).scroll(function() {
-			var sd = $(window).scrollTop();
-			if(typeof document.body.style.maxHeight === "undefined") {
-				$(containerIDhash).css({
-					'position': 'absolute',
-					'top': $(window).scrollTop() + $(window).height() - 50
-				});
-			}
-			if ( sd > settings.min ) 
-				$(containerIDhash).fadeIn(settings.inDelay);
-			else 
-				$(containerIDhash).fadeOut(settings.Outdelay);
-		});
-
-    };
-})(jQuery);

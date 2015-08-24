@@ -11,7 +11,7 @@
  * http://codeigniter.com for further improvement and reliability. 
  *
  * @package     PageStudio
- * @author      Cosmo Mathieu <cosmo@cimwebdesigns.com>   
+ * @author      Cosmo Mathieu <cosmo@cosmointeractive.co>   
  */
  
 // ------------------------------------------------------------------------

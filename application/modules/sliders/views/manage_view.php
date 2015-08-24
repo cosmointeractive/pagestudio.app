@@ -78,152 +78,155 @@
         </div><!-- // .col-lg-12 -->
     </div>
     
-    <!-- Upload modal -->
-    <div class="fullscreen-modal modal fade" id="photoUploadModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <!-- Project Details Go Here -->
-                            <h2>Photo Upload</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            
-                            
-                            <form action="<?php $_SERVER['PHP_SELF'];?>" method="POST" enctype="multipart/form-data" >
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div class="text-left">
-                                            Select File To Upload:<br />
-                                            <input type="file" name="userfile" multiple="multiple" />
-                                            <br />
-                                            <div class="badge">IMAGES 5MB max in size.</div>
-                                        </div>
-                                
-                                        <br />
-                                        <label>Select Mode:</label>
-                                        <input type="radio" name="mode" value="crop" checked="checked" />   Crop
-                                        <input type="radio" name="mode" value="resize" />   Resize
-                                        <input type="radio" name="mode" value="rotate" />   Rotate
-                                        <input type="radio" name="mode" value="watermark" />   Water Mark
-                                        <br />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <input type="text" name="image_title" class="form-control input-md" placeholder="Image title (optional)" value="<?php if(Input::get('image_title')) echo Input::get('image_title');?>" />
-                                        <span class="help-block text-left"><em>This text will show in place of the image if it doesn't load.</em></span>  
-                                        <br />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <textarea name="image_caption" class="form-control mceAdvanced" cols="80" rows="4" placeholder="Image caption (optional)"><?php if(Input::get('image_caption')) echo Input::get('image_caption');?></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <br />
-                                        <!-- <input type="submit" name="submit" value="Upload" class="btn btn-success" /> -->
-                                        <button type="submit" name="submit" value="Upload" class="btn btn-success"><i class="fa fa-upload"></i> Upload</button>
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <?php
-                            if(isset($image_info)) {
-                                foreach($image_info as $info) {
-                                    echo $info . '<br />';
-                                }
-                            }
-                            ?>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<?php include_once APPPATH . 'views/pre_footer_view.php' ?>
     
-    <!-- Photo Edit Modal -->
-    <div class="fullscreen-modal modal fade" id="photoEditModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
+<!-- Upload modal -->
+<div class="fullscreen-modal modal fade" id="photoUploadModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+        <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+                <div class="rl">
                 </div>
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <!-- Project Details Go Here -->
-                            <h2>Edit Upload</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="modal-body">
+                        <!-- Project Details Go Here -->
+                        <h2>Photo Upload</h2>
+                        <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                        
+                        
+                        <form action="<?php $_SERVER['PHP_SELF'];?>" method="POST" enctype="multipart/form-data" >
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="text-left">
+                                        Select File To Upload:<br />
+                                        <input type="file" name="userfile" multiple="multiple" />
+                                        <br />
+                                        <div class="badge">IMAGES 5MB max in size.</div>
+                                    </div>
                             
-                            
-                            <form action="<?php $_SERVER['PHP_SELF'];?>" method="POST" enctype="multipart/form-data" >
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div class="text-left">
-                                            Select File To Upload:<br />
-                                            <input type="file" name="userfile" multiple="multiple" />
-                                            <br />
-                                            <div class="badge">IMAGES 5MB max in size.</div>
-                                        </div>
-                                
-                                        <br />
-                                        <label>Select Mode:</label>
-                                        <input type="radio" name="mode" value="crop" checked="checked" />   Crop
-                                        <input type="radio" name="mode" value="resize" />   Resize
-                                        <input type="radio" name="mode" value="rotate" />   Rotate
-                                        <input type="radio" name="mode" value="watermark" />   Water Mark
-                                        <br />
-                                    </div>
+                                    <br />
+                                    <label>Select Mode:</label>
+                                    <input type="radio" name="mode" value="crop" checked="checked" />   Crop
+                                    <input type="radio" name="mode" value="resize" />   Resize
+                                    <input type="radio" name="mode" value="rotate" />   Rotate
+                                    <input type="radio" name="mode" value="watermark" />   Water Mark
+                                    <br />
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <input type="text" name="image_title" class="form-control input-md" placeholder="Image title (optional)" value="<?php if(Input::get('image_title')) echo Input::get('image_title');?>" />
-                                        <span class="help-block text-left"><em>This text will show in place of the image if it doesn't load.</em></span>  
-                                        <br />
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <input type="text" name="image_title" class="form-control input-md" placeholder="Image title (optional)" value="<?php if(Input::get('image_title')) echo Input::get('image_title');?>" />
+                                    <span class="help-block text-left"><em>This text will show in place of the image if it doesn't load.</em></span>  
+                                    <br />
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <textarea name="image_caption" class="form-control mceAdvanced" cols="80" rows="4" placeholder="Image caption (optional)"><?php if(Input::get('image_caption')) echo Input::get('image_caption');?></textarea>
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <textarea name="image_caption" class="form-control mceAdvanced" cols="80" rows="4" placeholder="Image caption (optional)"><?php if(Input::get('image_caption')) echo Input::get('image_caption');?></textarea>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <br />
-                                        <!-- <input type="submit" name="submit" value="Upload" class="btn btn-success" /> -->
-                                        <button type="submit" name="submit" value="Upload" class="btn btn-success"><i class="fa fa-upload"></i> Upload</button>
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <br />
+                                    <!-- <input type="submit" name="submit" value="Upload" class="btn btn-success" /> -->
+                                    <button type="submit" name="submit" value="Upload" class="btn btn-success"><i class="fa fa-upload"></i> Upload</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
                                 </div>
-                            </form>
-                            <?php
-                            if(isset($image_info)) {
-                                foreach($image_info as $info) {
-                                    echo $info . '<br />';
-                                }
+                            </div>
+                        </form>
+                        <?php
+                        if(isset($image_info)) {
+                            foreach($image_info as $info) {
+                                echo $info . '<br />';
                             }
-                            ?>
-                            
-                        </div>
+                        }
+                        ?>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<?php include APPPATH . 'views/footer_view.php'; 
+</div>
 
-/* End of file .php */
-/* Location: ./application/modules/sliders/views/ .php */
+<!-- Photo Edit Modal -->
+<div class="fullscreen-modal modal fade" id="photoEditModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+        <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+                <div class="rl">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="modal-body">
+                        <!-- Project Details Go Here -->
+                        <h2>Edit Upload</h2>
+                        <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                        
+                        
+                        <form action="<?php $_SERVER['PHP_SELF'];?>" method="POST" enctype="multipart/form-data" >
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="text-left">
+                                        Select File To Upload:<br />
+                                        <input type="file" name="userfile" multiple="multiple" />
+                                        <br />
+                                        <div class="badge">IMAGES 5MB max in size.</div>
+                                    </div>
+                            
+                                    <br />
+                                    <label>Select Mode:</label>
+                                    <input type="radio" name="mode" value="crop" checked="checked" />   Crop
+                                    <input type="radio" name="mode" value="resize" />   Resize
+                                    <input type="radio" name="mode" value="rotate" />   Rotate
+                                    <input type="radio" name="mode" value="watermark" />   Water Mark
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <input type="text" name="image_title" class="form-control input-md" placeholder="Image title (optional)" value="<?php if(Input::get('image_title')) echo Input::get('image_title');?>" />
+                                    <span class="help-block text-left"><em>This text will show in place of the image if it doesn't load.</em></span>  
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <textarea name="image_caption" class="form-control mceAdvanced" cols="80" rows="4" placeholder="Image caption (optional)"><?php if(Input::get('image_caption')) echo Input::get('image_caption');?></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <br />
+                                    <!-- <input type="submit" name="submit" value="Upload" class="btn btn-success" /> -->
+                                    <button type="submit" name="submit" value="Upload" class="btn btn-success"><i class="fa fa-upload"></i> Upload</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                        <?php
+                        if(isset($image_info)) {
+                            foreach($image_info as $info) {
+                                echo $info . '<br />';
+                            }
+                        }
+                        ?>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php include APPPATH . 'views/after_footer_view.php'; 
+
+/* End of file manage_view.php */
+/* Location: ./application/modules/sliders/views/manage_view.php */

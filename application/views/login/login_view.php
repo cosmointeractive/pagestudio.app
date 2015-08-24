@@ -98,10 +98,22 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script> 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    
+    <!-- Plugin - SlimScroll -->
+    <script src="<?php echo admin_theme_uri(); ?>public_html/themes/_system/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="<?php echo admin_theme_uri(); ?>public_html/themes/_system/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="<?php echo admin_theme_uri(); ?>public_html/themes/_system/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    
     <script src="<?php echo BASE_URL; ?>public_html/themes/_system/js/app.js"></script>    
     
-    <script>
+    <!-- Javascript code to make username field active on page load -->
+    <script type="text/javascript" language="JavaScrip">
+    /*! 
+     * Set focus on user input field
+     */
+    document.forms['admin_login'].elements['username'].focus();
+    
     /*!
      * Show password in type field
      */

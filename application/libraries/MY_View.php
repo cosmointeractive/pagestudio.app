@@ -71,6 +71,16 @@ class MY_View //extends View
     {
         $this->pageLevelJS = $array;
     }
+    
+    /** 
+     * Provides a way to add page level view javascript function files
+     * 
+     * @access      Public 
+     */
+    public function addScript($array = '')
+    {
+        $this->pageLevelScript = $array;
+    }
         
     // Return the page level css files in an array
     public function pageCSS()
@@ -82,6 +92,12 @@ class MY_View //extends View
     public function pageJS()
     {
         return ! empty($this->pageLevelJS) ? $this->pageLevelJS : '';
+    }
+    
+    // Return the page level css files in an array
+    public function pageScript()
+    {
+        return ! empty($this->pageLevelScript) ? $this->pageLevelScript : '';
     }
     
     /**

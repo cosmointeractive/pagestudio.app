@@ -322,7 +322,7 @@ class Sliders extends Addons
         if ( ! empty($slider_id) && is_numeric($slider_id)) {
             // Get all images for the slider from the database if any            
             $slider_photos = $slider->getSliderEntries($slider_id);
-            var_dump($slider_photos);
+            // var_dump($slider_photos);
             
             // Only attempt to delete images if the slider is not empty 
             if ( ! empty($slider_photos)) {                
@@ -362,7 +362,7 @@ class Sliders extends Addons
         if ( ! empty($slider_id) && is_numeric($slider_id)) {
             // Get all images for the slider from the database if any            
             $slider_photos = $slider->getSliderEntries($slider_id);
-            var_dump($slider_photos);
+            // var_dump($slider_photos);
             
             // Only attempt to delete images if the slider is not empty 
             if ( ! empty($slider_photos)) {                

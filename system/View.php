@@ -84,8 +84,7 @@ class View
     {
         return ( ! empty($this->pageLevelJS)) ? $this->pageLevelJS : '';
     }
-    
-    
+        
     /**
      * Returns the content of the model to the viewer
      * 

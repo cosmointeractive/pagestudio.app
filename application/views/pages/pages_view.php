@@ -10,12 +10,18 @@
                 </div>
             </div>';
         }
-        ?>        
+        ?>
         <div class="col-lg-12">
             <table id="make-searchable-5" class="table table-bordered table-hover table-striped table-white tablesorter no-side-borders">
                 <thead>
                     <tr>
-                        <th width="34" align="center"><input name="fields[]" value="" type="checkbox"></th>
+                        <th width="34" align="center">
+							<div class="checkbox" id="styleCheckbox">
+								<label class="checkbox-custom" data-initialize="checkbox">
+									<input name="fields[]" class="sr-only" type="checkbox" value="">
+								</label>
+							</div>
+						</th>
                         <th width="400"><b>Title</b> </th>
                         <th width="200"><b>Info</b></th>
                         <th><b>Preview</b></th>
@@ -24,7 +30,7 @@
                 <tbody>
                 <?php foreach ($pages as $page) : ?>
                     <tr>
-                        <td class="sorting_1" align="center"><input name="fields[]" value="" type="checkbox"></td>
+                        <td class="sorting_1" align="center"><input name="fields[]" id="" value="" type="checkbox"></td>
                         <td class="profile-detail">
                             <div>
                                 <a href="<?php echo BASE_URL . 'pages/edit/' . $page->id;?>"><?php echo $page->page_title; ?></a>

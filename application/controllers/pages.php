@@ -67,19 +67,6 @@ class Pages extends MY_Controller
         // Load models
         $entries = $this->loadModel('Pages_model');
         
-        // Build the template view 
-		$template = $this->loadView('pages/new_page_view');
-        $template->addJS(array( 
-            'http://localhost/projects/pagestudio_v2.0/public_html/themes/_system/js/plugins/tinymce/tinymce.min.js',
-            'http://localhost/projects/pagestudio_v2.0/public_html/themes/_system/js/plugins/tinymce/custom_init.js'
-        ));
-        $template->set('page', array(
-            'title' => 'New Page',
-            'heading' => '',
-            'description' => '',
-            'icon' => '<i class="icon x32 icon-pencil"></i>'
-        ));
-        
         // Check if update form submitted 
         if(Input::exists('post')) {
             if(Input::get('save')) {
@@ -109,11 +96,27 @@ class Pages extends MY_Controller
                 }   
             } 
         } 
-        $template->set('errors', $errors);
-        $template->set('bread', $bc->makeBread());
-        options_pane_widget_register(array(
-            'body' => '<input type="button" class="btn btn-default" onclick="document.getElementById(\'editor\').submit();" value="Save Changes">'
+        
+        // Build the template view 
+		$template = $this->loadView('pages/new_page_view');
+        $template->addJS(array( 
+            BASE_URL . 'public_html/themes/_system/js/plugins/tinymce/tinymce.min.js',
+            BASE_URL . 'public_html/themes/_system/js/plugins/tinymce/custom_init.js'
         ));
+        $template->set('page', array(
+            'title' => 'New Page',
+            'heading' => '',
+            'description' => '',
+            'icon' => '<i class="icon x32 icon-pencil"></i>'
+        ));
+        $template->set('top_action_buttons', 
+            '<input type="button" class="btn btn-primary" onclick="document.getElementById(\'editor\').submit();" value="Save Changes">'
+        );
+        $template->set('errors', $errors);
+        // $template->set('bread', $bc->makeBread());
+        // options_pane_widget_register(array(
+            // 'body' => '<input type="button" class="btn btn-default" onclick="document.getElementById(\'editor\').submit();" value="Save Changes">'
+        // ));
 		$template->render();
     }
     
@@ -128,25 +131,11 @@ class Pages extends MY_Controller
     public function edit()
     {
         $bc = new Breadcrumb();
-        $bc->addCrumb('Pages', BASE_URL . 'pages');
-        $bc->addCrumb('Page Edit', BASE_URL . 'pages/edit/' . Url::segment(2));
+        // $bc->addCrumb('Pages', BASE_URL . 'pages');
+        // $bc->addCrumb('Page Edit', BASE_URL . 'pages/edit/' . Url::segment(2));
         
         // Load models
         $pages = $this->loadModel('Pages_model');
-        
-        // Build the template view 
-		$template = $this->loadView('pages/page_edit_view');
-        $template->addJS(array( 
-            BASE_URL . 'public_html/themes/_system/js/plugins/tinymce/tinymce.min.js',
-            BASE_URL . 'public_html/themes/_system/js/plugins/tinymce/custom_init.js'
-        ));
-        $template->set('page', array(
-            'title' => 'Page Edit',
-            'heading' => '',
-            'description' => 'Manage pages',
-            'icon' => '<i class="icon x32 icon-pencil"></i>',
-            'body_class' => 'bg-grey'
-        ));
         
         // Check if update form submitted 
         if(Input::exists('post')) {
@@ -154,6 +143,7 @@ class Pages extends MY_Controller
                 $pages->updateEntry(
                     Input::get('ID'),
                     escape_and_addslashes( Input::get('page_title')),
+                    escape_and_addslashes( Input::get('page_slug')),
                     escape_and_addslashes( Input::get('page_content'))
                 );
                 
@@ -164,13 +154,31 @@ class Pages extends MY_Controller
             } 
         } else {
             // Get page value from database
-            $page = $pages->getEntry(Url::segment(2));   
+            $page = $pages->getEntry(Url::segment(2));  
         }
-        $template->set('bread', $bc->makeBread());
-        $template->set('pages' , $page);
-        options_pane_widget_register(array(
-            'body' => '<input type="button" class="btn btn-default" onclick="document.getElementById(\'editor\').submit();" value="Save Changes">'
+        
+        // Build the template view 
+		$template = $this->loadView('pages/page_edit_view');
+        $template->addJS(array( 
+            BASE_URL . 'public_html/themes/_system/js/plugins/tinymce/tinymce.min.js',
+            BASE_URL . 'public_html/themes/_system/js/plugins/tinymce/custom_init.js'
         ));
+        $template->set('page', array(
+            'title' => $page[0]->page_title,
+            'heading' => '',
+            'description' => 'Page edit',
+            'icon' => '<i class="icon x32 icon-pencil"></i>',
+            'body_class' => 'bg-grey'
+        ));
+        // $template->set('bread', $bc->makeBread());
+        $template->set('top_action_buttons', 
+            '<a href="' . BASE_URL . $page[0]->page_slug . '" target="_blank">Preview</a> ' .
+            '<input type="button" class="btn btn-primary" onclick="document.getElementById(\'editor\').submit();" value="Save Changes">'
+        );
+        $template->set('pages' , $page);
+        // options_pane_widget_register(array(
+            // 'body' => '<input type="button" class="btn btn-default" onclick="document.getElementById(\'editor\').submit();" value="Save Changes">'
+        // ));
 		$template->render();
     }
     

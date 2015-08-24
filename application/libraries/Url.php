@@ -67,6 +67,13 @@ class Url
 		 * Split url into chunks using '/' as the delimiter
 		 */
         $requested_url = explode('/', $requested_url);
+        
+        /**
+         * !Hack 
+         * 
+         * Set segment key of 0=>1.
+         */
+        array_shift($requested_url);
 		
 		return ( isset($requested_url[$segment]) ) ? $requested_url[$segment] : false;
 	}

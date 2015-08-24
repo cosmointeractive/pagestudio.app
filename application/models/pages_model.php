@@ -89,11 +89,12 @@ class Pages_model extends Model
      * @param      string $post_content
      * @return     bool
      */
-	public function updateEntry($ID, $page_title, $page_content)
+	public function updateEntry($ID, $page_title, $page_slug, $page_content)
 	{
 		$query = Database::getInstance()->update(
             "cimp_pages", $ID,  array(
                 'page_title' => $page_title,
+                'page_slug' => $page_slug,
                 'page_content' => $page_content
             )
         );

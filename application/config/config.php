@@ -61,7 +61,7 @@ date_default_timezone_set('America/New_York');
  * @global     mixed $GLOBALS['config'] Holder of all configuration variables
  */
 $GLOBALS['config'] = array(    
-    'base_url' => 'http://localhost/projects/pagestudio_v2.0/',
+    'base_url' => 'http://local.pagestudio.app/',
     'default_controller' => 'main',    
     'admin_controller' => 'admin',    
     'login_controller' => 'login',    
@@ -95,7 +95,7 @@ $GLOBALS['config'] = array(
         'driver'    => '',
         'name'      => 'default',
         'extension' => '.cache',
-        'file_path' => APPPATH . 'cache/'
+        'file_path' => 'public_html/cache/'
     ), 
     'thumb_image_size' => array(
         '-380x290' => array(

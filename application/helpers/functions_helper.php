@@ -55,6 +55,7 @@
  * - arrayToObject()
  * - mime_file_type()
  * - datetime()                         Function with formated date
+ * - remove_am_pm()                     Removes AM PM from a given string
  */
  
 /**
@@ -73,7 +74,7 @@ function escape_and_addslashes($string) {
 
 	$string = strtr( $string, $array );
     
-	return addcslashes(mysql_real_escape_string($string), "%_"); 
+	return addcslashes($string, "%_"); 
 }
 
 /**
@@ -658,6 +659,23 @@ if( ! function_exists('datetime')){
     }
 }
 
+/**
+ * Remove AM/PM from string 
+ *
+ * @param        string $string (Required) The string to be processed
+ *
+ * @return       string
+ */
+if( ! function_exists('remove_am_pm')) {    
+	function remove_am_pm($string) {
+		$array = array(
+			'AM' => '',
+			'PM' => ''
+		);
+
+		return $string = trim(strtr( $string, $array ));
+	}
+}
 
 /* End of file functions_helper.php */
 /* Location: ./application/helpers/functions_helper.php */

@@ -36,11 +36,11 @@ class Database
     /**
      * Private variables 
      */
-    private $_pdo,              //storage for PDO object
-            $_query,            //Stored query
-            $_error = false,    //PDO exception error 
-            $_results,          //Results of the database query
-            $_count = 0;        //Store results returned
+    private $_pdo,              // storage for PDO object
+            $_query,            // Stored query
+            $_error = false,    // PDO exception error 
+            $_results,          // Results of the database query
+            $_count = 0;        // Store results returned
     
     /**
      * Constructor
@@ -148,7 +148,7 @@ class Database
             if (in_array($operator, $operators)) {
                 if(is_array($value)) {
                     $cnt = 0;
-                    foreach($value as $condition){
+                    foreach($value as $condition) {
                         $x = "{$field} {$operator} ?";
                         if($cnt > 0) {
                             $x .= " AND {$field} {$operator} ?";

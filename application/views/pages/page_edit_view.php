@@ -17,6 +17,14 @@
             </div>
             
             <div class="form-group">
+                <div class="col-md-6">
+                    <input type="text" name="page_slug" class="form-control input-md" placeholder="Page Slug" value="<?php echo remove_slashes( $page->page_slug );?>" />
+                    <span class="help-block"><em>Your page SEO friendly URL</em></span>  
+                    <br />
+                </div>
+            </div>
+            
+            <div class="form-group">
               <div class="col-md-12">
                 <textarea name="page_content" class="form-control mceAdvanced" cols="80" rows="20"><?php echo remove_slashes( $page->page_content );?></textarea>
               </div>

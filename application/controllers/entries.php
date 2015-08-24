@@ -69,8 +69,8 @@ class Entries extends MY_Controller
         // Build the template view 
 		$template = $this->loadView('entries/entries_new_view');
         $template->addJS(array( 
-            'http://localhost/projects/pagestudio_v2.0/public_html/themes/_system/js/plugins/tinymce/tinymce.min.js',
-            'http://localhost/projects/pagestudio_v2.0/public_html/themes/_system/js/plugins/tinymce/custom_init.js'
+            BASE_URL . 'public_html/themes/_system/js/plugins/tinymce/tinymce.min.js',
+            BASE_URL . 'public_html/themes/_system/js/plugins/tinymce/custom_init.js'
         ));
         $template->set('page', array(
             'title' => 'New Article',
@@ -131,8 +131,8 @@ class Entries extends MY_Controller
         // Build the template view 
 		$template = $this->loadView('entries/entry_edit_view');
         $template->addJS(array( 
-            'http://localhost/projects/pagestudio_v2.0/public_html/themes/_system/js/plugins/tinymce/tinymce.min.js',
-            'http://localhost/projects/pagestudio_v2.0/public_html/themes/_system/js/plugins/tinymce/custom_init.js'
+            BASE_URL . 'public_html/themes/_system/js/plugins/tinymce/tinymce.min.js',
+            BASE_URL . 'public_html/themes/_system/js/plugins/tinymce/custom_init.js'
         ));
         $template->set('page', array(
             'title' => 'Entry Edit',

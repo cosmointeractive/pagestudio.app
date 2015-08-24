@@ -56,6 +56,13 @@ class Addons extends MY_Controller
             );
             break;
             
+            case 'calendar' : $pageController = array(
+                'module' => 'calendar',
+                'controller' => 'calendar',
+                'method' => $method
+            );
+            break;
+            
             // default : $pageController = array(
                 // 'module' => 'site',
                 // 'controller' => 'pages',

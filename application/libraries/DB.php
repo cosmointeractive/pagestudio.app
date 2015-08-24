@@ -27,7 +27,7 @@
  * @subpackage Libraries
  * @link       http://cosmointeractive.co
  */
-class Database
+class DB
 {
     /**
      * Private static property 
@@ -63,10 +63,10 @@ class Database
     {
         try {
             $this->_pdo = new PDO(
-                'mysql:dbname=projects_auto_draft;' .
-                'host=localhost', 
-                'jonah',
-                'jonah213'
+                'mysql:dbname=' . Config::get('mysql/db') . ';' .
+                'host=' . Config::get('mysql/host'), 
+                Config::get('mysql/username'),   //Username
+                Config::get('mysql/password')    //Password
             );
         } catch(PDOException $e) {
             die($e->getMessage());

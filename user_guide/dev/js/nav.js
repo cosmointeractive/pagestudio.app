@@ -19,12 +19,11 @@ function create_menu(basepath)
 		'	<li><a href="'+base+'index.html#license">License</a></li>' +
 		'	<li><a href="">BitBucket</a></li>' +
 		'	<li><a href="">GitHub</a></li>' +
-        '   <li><a href="'+base+'template.html">Example</a></li>' +
+		'	<li><a href="'+base+'style-guide.html">Style Guide</a></li>' +
 		'</ul>' +
-        
 
 		'</td><td class="td_sep" valign="top">' +
-        
+                
 		'<h3>Database Query Builder</h3>' +
 		'<ul>' +
             '<li><a href="'+base+'docs-database.html#introduction">Instroduction</a></li>' +
@@ -34,11 +33,11 @@ function create_menu(basepath)
             '<li><a href="'+base+'docs-database.html#deletes">Deletes</a></li>' +
 		'</ul>' +
         
-		'<h3>Input Validator</h3>' +
+        '<h3>Input Validator</h3>' +
 		'<ul>' +
             '<li><a href="'+base+'docs-input-validator.html#introduction">Instroduction</a></li>' +
             '<li><a href="'+base+'docs-input-validator.html#basic">Basic Usage</a></li>' +
-            '<li><a href="'+base+'docs-input-validator.html#errors">Working With Error Messages</a></li>' + 
+            '<li><a href="'+base+'docs-input-validator.html#errors">Working With Errors</a></li>' + 
 		'</ul>' +
 
 		'<h3>General Topics</h3>' +

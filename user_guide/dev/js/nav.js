@@ -37,10 +37,8 @@ function create_menu(basepath)
 		'<h3>Input Validator</h3>' +
 		'<ul>' +
             '<li><a href="'+base+'docs-input-validator.html#introduction">Instroduction</a></li>' +
-            '<li><a href="'+base+'docs-input-validator.html#selects">Selects</a></li>' +
-            '<li><a href="'+base+'docs-input-validator.html#inserts">Inserts</a></li>' + 
-            '<li><a href="'+base+'docs-input-validator.html#updates">Updates</a></li>' +
-            '<li><a href="'+base+'docs-input-validator.html#deletes">Deletes</a></li>' +
+            '<li><a href="'+base+'docs-input-validator.html#basic">Basic Usage</a></li>' +
+            '<li><a href="'+base+'docs-input-validator.html#errors">Working With Error Messages</a></li>' + 
 		'</ul>' +
 
 		'<h3>General Topics</h3>' +

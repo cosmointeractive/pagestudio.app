@@ -130,13 +130,12 @@ final class Login extends Controller
                             'required' => false,
                             'min' => 5,
                             'max' => 20,
-                            'unique' => 'users'
+                            // 'unique' => 'cimp_users'
                         ),
                         'password' => array(
                             'required' => true,
                             'min' => 8,
-                            'max' => 50,
-                            'unique' => 'users'
+                            'max' => 50
                         )
                     ));
                     

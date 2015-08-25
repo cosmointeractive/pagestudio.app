@@ -157,7 +157,11 @@
                                 </li>
                                 <li class="line"></li>
                                 <li>
-                                    <a href="<?php echo BASE_URL . 'user_guide/'?>" target="_blank">User Manual</a>
+                                    <a href="<?php echo BASE_URL . 'user_guide/dev'?>" target="_blank">Developer Manual</a>
+                                    <a href="#" class="nav-sub__config" title="Settings"><i class="fa fa-book"></i></a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo BASE_URL . 'user_guide/user'?>" target="_blank">User Manual</a>
                                     <a href="#" class="nav-sub__config" title="Settings"><i class="fa fa-book"></i></a>
                                 </li>
                                 <li class="active">

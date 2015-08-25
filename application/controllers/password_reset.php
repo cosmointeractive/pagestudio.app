@@ -23,6 +23,7 @@ final class Password_Reset extends Controller
             $_email,
             $_tmp_passwd,
             $_formResult,
+            $Message = '',
             $_errors = array();
             
     public function index()
@@ -251,7 +252,7 @@ final class Password_Reset extends Controller
 			return 1;
 		} else {
 			$this->MailErrorInfo = $mail->ErrorInfo;
-			$this->errors[] .= "Mailer Error: " . $mail->ErrorInfo;
+			$this->_errors[] .= "Mailer Error: " . $mail->ErrorInfo;
 			return 0;
 		}
     }

@@ -17,7 +17,7 @@
             }
         }
         ?>         
-        <form name="update_category" method="POST" action="<?php $_SERVER['PHP_SELF'];?>" target="_self" accept-charset="UTF-8">
+        <form name="update_user" id="editor" method="POST" action="<?php $_SERVER['PHP_SELF'];?>" target="_self" accept-charset="UTF-8">
         <?php foreach($entry as $entry) { ?>
             
             <div class="col-lg-4">						
@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password: <span class="required">*</span></label>
+                    <label for="password">Password:</label>
                     <?php if (isset($_SESSION['passError'])) { echo '<div class="error">'.$_SESSION['passError'].'</div>'; } ?>
                     <div class="form-group input-group <?php if (isset($_SESSION['passError'])) { echo 'has-error'; }?>">
                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password">Verify Password: <span class="required">*</span></label>
+                    <label for="password">Verify Password:</label>
                     <?php if (isset($_SESSION['passError'])) { echo '<div class="error">'.$_SESSION['passError'].'</div>'; } ?>
                     <div class="form-group input-group <?php if (isset($_SESSION['passError'])) { echo 'has-error'; }?>">
                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
@@ -97,12 +97,13 @@
                 
                 <input type="hidden" name="token" value="<?php echo Token::gen(); ?>" />
                 <input type="hidden" name="uid" value="<?php echo $entry->id; ?>" />
+                <input type="hidden" name="update" value="true" />
                 
             </div><!-- .end col-lg-4 -->
         <?php 
         } 
         ?>
-            <button type="submit" name="submit" value="true" class="btn btn-primary">Update User Account</button>	
+            <!-- <button type="submit" name="submit" value="true" class="btn btn-primary">Update User Account</button> -->
         </form>
         
     </div>

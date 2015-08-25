@@ -99,16 +99,28 @@ class Users_model extends Model
      * @param      string $category_description
      * @return     bool
      */
-	public function updateEntry($ID, $category_title, $category_description)
+	public function updateEntry($ID, $hashed_password)
 	{
-		$query = Database::getInstance()->update(
-            "cimp_categories", $ID, array(
-                'category_title' => escape_and_addslashes( $category_title ),
-                'category_description' => escape_and_addslashes( $category_description)
-            ), 
-            'category_ID'
-        );
-        
+        if( ! empty($hashed_password)) {
+            $query = DB::table('cimp_users')->where('id', $ID)->update([
+                'username' => Input::get('username'),
+                'password' => $hashed_password,
+                'email' => Input::get('email'),
+                'firstname' => Input::get('firstname'),
+                'lastname' => Input::get('lastname'),
+                'help_tips' => Input::get('help_tips'),
+                'access' => Input::get('access'),
+            ]);
+        } else {
+            $query = DB::table('cimp_users')->where('id', $ID)->update([
+                'username' => Input::get('username'),
+                'email' => Input::get('email'),
+                'firstname' => Input::get('firstname'),
+                'lastname' => Input::get('lastname'),
+                'help_tips' => Input::get('help_tips'),
+                'access' => Input::get('access'),
+            ]);
+        }
         return ( ! $query) ? false : true;
 	}
     

@@ -1,7 +1,22 @@
 <?php include APPPATH . 'views/header_view.php'; ?>
     <?php 
     if(Session::exists('success')) {
-        echo Session::flash('success') . '<br /><br />';            
+        echo '
+        <div style="padding:0 20px">
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                ' . Session::flash('success') . '
+            </div>
+        </div>';
+    }
+    if(Session::exists('error')) {
+        echo '
+        <div style="padding:0 20px">
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                ' . Session::flash('error') . '
+            </div>
+        </div>';
     }
     ?>  
     <div class="row" style="padding:30px 0">

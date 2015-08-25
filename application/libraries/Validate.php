@@ -52,7 +52,7 @@ class Validate
                         case 'unique':
                             $this->_db->get($rule_value, array($item, '=', $value));
                             if($this->_db->count()) {
-                                $this->addError("This {$item} already exists in the database.");
+                                $this->addError("This {$item}: <b>".$value."</b> already exists in the database.");
                             }
                             break;
                     }

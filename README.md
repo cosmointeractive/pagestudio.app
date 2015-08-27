@@ -1,7 +1,7 @@
 Page Studio
 =============
 
-A lightweight  PHP CMS built on an Open Source technology.
+A lightweight PHP CMS built on Open Source technology.
 
 #Website
 https://www.pagestudio.co/

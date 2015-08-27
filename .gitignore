@@ -41,3 +41,12 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# =========================
+# This Repository
+# =========================
+
+# Images upload folder(s)
+.public_html/uploads/sliders
+.public_html/uploads/filemanager_source
+.public_html/uploads/filemanager_thumbs

@@ -78,25 +78,33 @@ class Users_model extends Model
     /**
      * Creates and entry in the database 
      *
-     * @param      string $table  
-     * @param      array $fields Array of table key and value
+     * @param      string $hashed_password  
      * @return     bool true or false
      */
-	public function addEntry($table, $fields)
+	public function addEntry($hashed_password)
 	{
-		$query = Database::getInstance()->insert(
-            $table, $fields
-        );
+        if( ! empty($hashed_password)) {            
+            $query = DB::table('cimp_users')->insert([
+                'username' => Input::get('username'),
+                'password' => $hashed_password,
+                'email' => Input::get('email'),
+                'firstname' => Input::get('firstname'),
+                'lastname' => Input::get('lastname'),
+                'help_tips' => Input::get('help_tips'),
+                'access' => Input::get('access'),
+            ]);
+            
+            
+        }
         
-        return ( ! $query) ? true : false;
+        return ( ! $query) ? false : true;
 	}
     
     /**
      * Updates a specific entry in the database
      *
      * @param      int $ID
-     * @param      string $category_title
-     * @param      string $category_description
+     * @param      string $hashed_password
      * @return     bool
      */
 	public function updateEntry($ID, $hashed_password)

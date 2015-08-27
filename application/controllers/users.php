@@ -71,34 +71,102 @@ class Users extends MY_Controller
     public function add()
     {
         $bc = new Breadcrumb();
-        $bc->addCrumb('Categories', BASE_URL . 'categories');
-        $bc->addCrumb('Add Entry', BASE_URL . 'categories/add/');
+        $bc->addCrumb('Users', BASE_URL . 'users');
+        $bc->addCrumb('Add User', BASE_URL . 'users/add/');
         
         // Load models
-        $entries = $this->loadModel('Categories_model');
+        $users = $this->loadModel('Users_model');
         
-        // Build the template view 
-		$template = $this->loadView('categories/categories_new_view');
+        /**
+         * Build the template view 
+         */
+        // Load the view
+		$template = $this->loadView('users/create_account_view');
+        
+        // Set default template vars 
         $template->set('page', array(
-            'title' => 'Add Category',
-            'heading' => '',
-            'description' => ''
+            'title' => 'Add User Account',
+            'icon' => '<i class="icon x32 icon-users"></i>',
+            'heading' => 'Add New User Account',
+            'description' => 'Add a new user account to the cms'
         ));
         
-        // Check if update form submitted 
+        // Check if _POST form submitted and perform actions 
         if(Input::exists('post')) {                
-            if(Input::get('submit')) {                
-                $entries->addEntry(
-                    'cimp_categories', 
-                    array(
-                        'category_title' => escape_and_addslashes( Input::get('category_title') ),
-                        'category_slug' => escape_and_addslashes( make_slug(Input::get('category_title')) ),
-                        'category_description' => escape_and_addslashes( Input::get('category_description') )
-                    )
-                ); 
+            if(Input::get('create')) {
+                /** 
+                 * Check if a token was submitted and validate it. This hepls
+                 * prevent the same form with the same data from being 
+                 * submitted twice, and CSRF.
+                 */
+                if(Token::validate(Input::get('token'))) {
+                    /** Validate user Input. */
+                    $validate = new Validate();
+                    $validation = $validate->check($_POST, array(
+                        'username' => array(
+                            'required' => true,
+                            'min' => 5,
+                            'max' => 20,
+                            // 'unique' => 'cimp_users',
+                            'field_name' => 'Username'
+                        ),
+                        'firstname' => array(
+                            'required' => true,
+                            'min' => 3,
+                            'max' => 50
+                        ),
+                        'lastname' => array(
+                            'required' => true,
+                            'min' => 3,
+                            'max' => 50
+                        ),
+                        'email' => array(
+                            'required' => true,
+                            'min' => 8,
+                            'max' => 50
+                        )
+                    ));
+                    
+                    // Validate password fields and ensure that they match 
+                    // Generate hashed password version and store in @var $tmp_passwd
+                    $this->passwordCheck(true);
+
+                    // If validations passed make the changes. Else return the errors.
+                    if($validate->passed() && empty($this->errors)) {
+                        // Enter user info in the database 
+                        if($users->addEntry($this->tmp_passwd)) {
+                            // Set flash message
+                            Session::set('success', 'User account was successfully created!');
+                            
+                            unset($_POST);  // Clear the form values
+                        }
+                        
+                    } else {
+                        $finalError = 'You must fix the follow errors before proceeding. <br />';
+                        foreach($validate->errors() as $error) {
+                            $finalError .= $error . '<br />';
+                        }
+                        $this->errors[] = $finalError;
+                        
+                        // @todo       Add additional error checking to pinpoint which fields are to be updated.
+                        // $errors = array(
+                            // 'noFname' => 'First name is required'
+                        // );
+                    }
+                } else {
+                    $this->errors[] = 'Token mismatch. It looks like you tried to refresh your browser. Try clicking the update button to submit your changes.'; 
+                }
+                
             } 
         } 
+        
+        // Set final template vars 
         $template->set('bread', $bc->makeBread());
+        $template->set('errors', $this->errors);
+        $template->set('pagelevel_errors', $errors);
+        $template->set('top_action_buttons', 
+            '<button class="btn btn-primary" name="submit" onclick="document.getElementById(\'editor\').submit();">Add User Account</button>'
+        );
 		$template->render();
     }
     
@@ -208,9 +276,9 @@ class Users extends MY_Controller
      * @access     private
      * @return     
      */
-    private function passwordCheck()
+    private function passwordCheck($strict = false)
     {
-        if(Input::get('password') || Input::get('password2')) {
+        if(Input::get('password') || Input::get('password2') || $strict) {
             /** Validate user Input. */
             $validate = new Validate();
             $validation = $validate->check($_POST, array(

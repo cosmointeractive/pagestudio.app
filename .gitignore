@@ -47,6 +47,6 @@ Temporary Items
 # =========================
 
 # Images upload folder(s)
-.public_html/uploads/sliders
-.public_html/uploads/filemanager_source
-.public_html/uploads/filemanager_thumbs
+public_html/uploads/sliders
+public_html/uploads/filemanager_source
+public_html/uploads/filemanager_thumbs

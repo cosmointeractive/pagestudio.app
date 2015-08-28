@@ -124,6 +124,11 @@ class Users extends MY_Controller
                             'required' => true,
                             'min' => 8,
                             'max' => 50
+                        ),
+                        'role' => array(
+                            'required' => true,
+                            'min' => 1,
+                            'max' => 50
                         )
                     ));
                     
@@ -213,6 +218,11 @@ class Users extends MY_Controller
                         'email' => array(
                             'required' => true,
                             'min' => 8,
+                            'max' => 50
+                        ),
+                        'role' => array(
+                            'required' => true,
+                            'min' => 1,
                             'max' => 50
                         )
                     ));

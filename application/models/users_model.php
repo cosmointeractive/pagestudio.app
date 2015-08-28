@@ -26,6 +26,8 @@ class Users_model extends Model
     {
         
     }
+    
+    // --------------------------------------------------------------------
 		
     /**
      * Return an array 
@@ -42,6 +44,8 @@ class Users_model extends Model
         
         return ( ! $query->count()) ? false : $query->results();
 	}
+    
+    // --------------------------------------------------------------------
     
     /**
      * Get a list of all categories, and the categories tied to 
@@ -75,6 +79,8 @@ class Users_model extends Model
         }
     }
     
+    // --------------------------------------------------------------------
+    
     /**
      * Creates and entry in the database 
      *
@@ -92,13 +98,14 @@ class Users_model extends Model
                 'lastname' => Input::get('lastname'),
                 'help_tips' => Input::get('help_tips'),
                 'access' => Input::get('access'),
+                'group_id' => Input::get('role'),
             ]);
-            
-            
         }
         
         return ( ! $query) ? false : true;
 	}
+    
+    // --------------------------------------------------------------------
     
     /**
      * Updates a specific entry in the database
@@ -118,6 +125,7 @@ class Users_model extends Model
                 'lastname' => Input::get('lastname'),
                 'help_tips' => Input::get('help_tips'),
                 'access' => Input::get('access'),
+                'group_id' => Input::get('role'),
             ]);
         } else {
             $query = DB::table('cimp_users')->where('id', $ID)->update([
@@ -127,22 +135,23 @@ class Users_model extends Model
                 'lastname' => Input::get('lastname'),
                 'help_tips' => Input::get('help_tips'),
                 'access' => Input::get('access'),
+                'group_id' => Input::get('role'),
             ]);
         }
         return ( ! $query) ? false : true;
 	}
     
+    // --------------------------------------------------------------------
+    
     /**
-     * Delete a specific entry in the database
+     * Delete a specific user in the database
      *
      * @param      int $ID
-     * @return     bool
+     * @return     bool True or False
      */
 	public function deleteEntry($ID)
 	{
-		$query = Database::getInstance()->delete( 
-            "cimp_categories", array('category_ID', '=', $ID) 
-        );
+        $query = DB::table('cimp_users')->where('id', '=', $ID)->delete();
         
         return ( ! $query) ? false : true;
 	}

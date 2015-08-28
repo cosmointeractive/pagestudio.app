@@ -74,6 +74,16 @@
                         <input type="password" name="password2" class="form-control" value="<?php if(Input::get('password2')) { echo Input::get('password2'); } ?>" maxlength="250" />
                     </div>								
                 </div>
+                <div class="form-group">
+                    <label for="role">User Role: <span class="required">*</span></label>
+                    <select name="role" class="form-control">
+                        <?php if( ! Input::get('role')) { ?>
+                        <option SELECTED value="" class="option"></option>
+                        <?php } ?>
+                        <option <?php if (Input::get('role') === '2') { echo 'SELECTED'; } ?> value="2" class="option">Administrator</option>
+                        <option <?php if (Input::get('role') === '3') { echo 'SELECTED'; } ?> value="3" class="option">Content Editor</option>
+                    </select>
+                </div>
                 
             </div><!-- .end col-lg-4 -->
             
@@ -83,16 +93,16 @@
                 <div class="form-group">
                     <label for="hints">Helpful Hints: <span class="required">*</span></label>
                     <select name="help_tips" class="form-control">
-                        <option <?php /* if ($entry->help_tips == 1) { echo 'SELECTED'; } */ ?> value="1" class="option">On</option>
-                        <option <?php /* if ($entry->help_tips == 0) { echo 'SELECTED'; } */ ?> value="0" class="option">Off</option>
+                        <option <?php if (Input::get('help_tips') === '1') { echo 'SELECTED'; } ?> value="1" class="option">On</option>
+                        <option <?php if (Input::get('help_tips') === '0') { echo 'SELECTED'; } ?> value="0" class="option">Off</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
                     <label for="access">Account Status: <span class="required">*</span></label>
                     <select name="access" class="form-control">
-                        <option <?php /* if ($entry->access == 1) { echo 'SELECTED'; } */ ?> value="1" class="option">Enabled</option>
-                        <option <?php /* if ($entry->access == 0) { echo 'SELECTED'; } */ ?> value="0" class="option">Disabled</option>
+                        <option <?php if (Input::get('access') === '1') { echo 'SELECTED'; } ?> value="1" class="option">Enabled</option>
+                        <option <?php if (Input::get('access') === '0') { echo 'SELECTED'; } ?> value="0" class="option">Disabled</option>
                     </select>
                 </div>
                 

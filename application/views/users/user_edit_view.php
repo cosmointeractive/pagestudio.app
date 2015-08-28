@@ -73,6 +73,19 @@
                         <input type="password" name="password2" class="form-control" value="" maxlength="250" />
                     </div>								
                 </div>
+                <div class="form-group">
+                    <label for="role">User Role: <span class="required">*</span></label>
+                    <select name="role" class="form-control">
+                        <?php if($entry->group_id === '0' || ! $entry->group_id) { ?>
+                        <option SELECTED value="" class="option"></option>
+                        <?php } ?>
+                        <?php if($entry->group_id === '1') { ?>
+                        <option SELECTED value="1" class="option">Super Administrator</option>
+                        <?php } ?>
+                        <option <?php if ($entry->group_id === '2') { echo 'SELECTED'; } ?> value="2" class="option">Administrator</option>
+                        <option <?php if ($entry->group_id === '3') { echo 'SELECTED'; } ?> value="3" class="option">Content Editor</option>
+                    </select>
+                </div>
                 
             </div><!-- .end col-lg-4 -->
             

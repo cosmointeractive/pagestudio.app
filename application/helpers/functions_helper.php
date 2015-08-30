@@ -590,6 +590,29 @@ if( ! function_exists('arrayToObject')) {
 }
 
 /**
+ * Convert a two dimensional array containing multiple objects into a single array
+ * 
+ * $records = call_user_func_array('array_merge', $options);
+ * $records = iterator_to_array(new RecursiveIteratorIterator(new RecursiveArrayIterator($options)), 0);
+ * 
+ * @syntax     mergeArrayObjectsToArray( $array ) 
+ * @param      array|object $array
+ * @return     array|object
+ */ 
+if( ! function_exists('mergeArrayObjectsToArray')) {
+    function mergeArrayObjectsToArray($array, $key, $value) {
+        $tmp_array = array();
+        $final_array = array();
+        
+        foreach ($array as $val) {
+            $tmp_array[$val->$key] = $val->$value;
+        }
+        
+        return $final_array[] = arrayToObject($tmp_array);
+    }
+}
+
+/**
  * Show css class in the html body tag
  * 
  * @param      array|string $atts

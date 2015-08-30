@@ -23,6 +23,8 @@ class Settings_model extends Model
         
     }
     
+    // --------------------------------------------------------------------
+    
     public static function get($var = '')
     {
         if (! empty($var)) {            
@@ -39,5 +41,40 @@ class Settings_model extends Model
         } else {
             return false;
         }
+    }
+    
+    // --------------------------------------------------------------------
+    
+    public function retrieve()
+    {
+        $query = DB::table('cimp_options')->get();
+        return ( $query ) ? $query : false;
+    }
+    
+    // --------------------------------------------------------------------
+
+    public function update($array)
+    {
+        $pdo = new PDO(
+            'mysql:dbname=' . Config::get('mysql/db') . ';' .
+            'host=' . Config::get('mysql/host'), 
+            Config::get('mysql/username'),   //Username
+            Config::get('mysql/password')    //Password
+        );
+        $fpdo = new FluentPDO($pdo);
+        
+        foreach($array as $option_name => $option_value) {
+            // DB::table('cimp_options')
+                // ->where('option_name', $option_name)
+                // ->update(['option_value' => $option_value]);
+        
+            $set = array('option_value' => $option_value);
+            $query = $fpdo->update('cimp_options')->set($set)->where(['option_name' => $option_name]);
+            $query->execute();
+        }
+        
+        // var_dump($array);
+        
+        return $query->fetchAll();
     }
 }

@@ -17,6 +17,7 @@
     
     <!-- stylesheets
 	============================================= -->
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,300' rel='stylesheet' type='text/css'>
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="<?php echo BASE_URL; ?>public_html/themes/_system/css/style.css" media="screen" rel="stylesheet">
     <link href="<?php echo BASE_URL; ?>public_html/themes/_system/css/menu.css" media="screen" rel="stylesheet">
@@ -98,7 +99,11 @@
                 ?>>
                     <a href="#nav-sub-users" class="nav-main-tooltip-right" title="Manage&nbsp;users" data-toggle="tab"><i class="icon flat icon-user"></i></a>
                 </li>
-                <li>
+                <li <?php 
+                    if(Url::segment(0) === 'settings') {
+                        echo 'class="active"';
+                    }
+                ?>>
                     <a href="#nav-sub-settings" class="nav-main-tooltip-right" title="Site&nbsp;Settings" data-toggle="tab"><i class="icon flat icon-cog-o"></i></a>
                 </li>
             </ul>
@@ -392,7 +397,11 @@
                                     <a href="<?php echo BASE_URL . 'categories/' ?>">View All</a>
                                 </li>
                             </ul>
-                            <ul id="nav-sub-settings" class="nav-sub">
+                            <ul id="nav-sub-settings" class="nav-sub <?php 
+                                if(Url::segment(0) === 'settings') {
+                                    echo 'active';
+                                }
+                            ?>">
                                 <li class="heading">
                                     System Settings
                                 </li>
@@ -404,28 +413,30 @@
                                         </div>
                                     </div>
                                 </li>
+                                <li class="heading">
+                                    Website
+                                </li>
+                                <li class=""><a href="">Apparance</a></li>					
                                 <li>
-                                    <a href="index.php?page_id=5">General</a>
+                                    <a href="index.php?page_id=17">Blog</a>
                                     <span class="nav-sub__config"><i class="fa fa-cog"></i></span>
                                 </li>
-                                <li>
-                                    <a href="index.php?page_id=17">Website</a>
+                                <li <?php if(Url::segment(0) === 'settings' && Url::segment(1) === 'general') echo 'class="active"'; ?>>
+                                    <a href="<?php echo BASE_URL . 'settings/general/' ?>">General</a>
                                     <span class="nav-sub__config"><i class="fa fa-cog"></i></span>
                                 </li>
-                                <li class=""><a href="">Blog</a></li>					
                                 <li class=""><a href="">Media</a></li>					
-                                <li class=""><a href="">Theme</a></li>					
                                 <li class="heading">
                                     E-mail
                                 </li>
                                 <li class="line"></li>
+                                <li <?php if(Url::segment(0) === 'settings' && Url::segment(1) === 'email') echo 'class="active"'; ?>>
+                                    <a href="<?php echo BASE_URL . 'settings/email/' ?>">Configuration</a>
+                                    <span class="nav-sub__config"><i class="fa fa-cog"></i></span>
+                                </li>				
                                 <li class="">
                                     <a href="#email-templates/">Templates</a>
                                 </li>
-                                <li>
-                                    <a href="index.php?page_id=18">Settings</a>
-                                    <span class="nav-sub__config"><i class="fa fa-cog"></i></span>
-                                </li>				
                                 <li class="line"></li>
                                 <li class="heading">
                                     Extra

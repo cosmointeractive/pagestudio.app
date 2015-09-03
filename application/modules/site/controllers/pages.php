@@ -159,8 +159,9 @@ class Pages extends Main
 			->add('About', $base_url . 'about/', menu::factory()
 				->add('Our Story', $base_url . 'our-story/')
 				->add('Our Beliefs', $base_url . 'our-beliefs/')
-            );
-					
+            )
+			->add('News', $base_url . 'news/', menu::factory());
+
         $menu->attrs = array(
             'id' => 'navigation',
             'class' => 'menu',

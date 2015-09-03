@@ -153,6 +153,10 @@ final class Login extends Controller
                             Session::set(Config::get('session/user_id'), $this->_user_id);
                             /** Set cookie to remember user if requested. */
                             $this->rememberMe();
+                            /** Update the login time */
+                             DB::table('cimp_users')
+                                ->where('id', $this->_user_id)
+                                ->update(['last_login' => datetime()]);
                             /** Redirect to the default controller. */
                             $this->redirect(Config::get('admin_controller'));
                         } else {

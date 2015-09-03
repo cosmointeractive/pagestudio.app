@@ -50,7 +50,7 @@
                             </div>
                         </td>
                         <td><?php echo ucfirst( $post->post_status );?></td>
-                        <td><a href="<?php echo BASE_URL . $post->post_slug;?>" target="_blank">Preview</a></td>
+                        <td><a href="<?php echo BASE_URL . 'news/' . $post->post_slug;?>" target="_blank">Preview</a></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

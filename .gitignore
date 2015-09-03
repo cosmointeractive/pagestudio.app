@@ -45,8 +45,9 @@ Temporary Items
 # =========================
 # This Repository
 # =========================
-
+.cache
 # Images upload folder(s)
+public_html/cache
 public_html/uploads
 public_html/uploads/sliders
 public_html/uploads/filemanager_source

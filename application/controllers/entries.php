@@ -163,7 +163,10 @@ class Entries extends MY_Controller
                 );
                 
                 // Get entry value from database
-                $entry = $entries->getEntry(Url::segment(2));   
+                $entry = $entries->getEntry(Url::segment(2));
+                
+                // Delete the cached post
+                $this->clearCache($entry[0]->post_slug);
             } 
         } else {
             // Get entry value from database
@@ -195,6 +198,29 @@ class Entries extends MY_Controller
             Session::flash('success', 'Event not deleted!');
         }
         $this->redirect('entries');
+    }
+    
+    // --------------------------------------------------------------------
+    
+    /**
+     * Clear the page cache so latest changes will show
+     * 
+     * @access     Private
+     * @param      string $key The page slug
+     * @return     NULL
+     */ 
+    private function clearCache( $key )
+    {
+        $c = new Cache(array(
+            'name' => Config::get('cache/name'),
+            'path' => Config::get('cache/file_path'),
+            'extension' => Config::get('cache/extension')
+        ));
+        
+        // Check if chache exists
+        if($c->isCached($key)) {
+            $c->erase($key);
+        }
     }
 }
 
